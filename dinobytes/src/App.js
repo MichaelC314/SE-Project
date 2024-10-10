@@ -54,27 +54,6 @@ function App() {
               Learn React
             </a>
           </header>
-
-          {/* Sections corresponding to sidebar links */}
-          <section id="topic1" style={{ marginTop: '50px' }}>
-            <h2>Topic 1</h2>
-            <p>Content for Topic 1...</p>
-          </section>
-
-          <section id="topic2" style={{ marginTop: '50px' }}>
-            <h2>Topic 2</h2>
-            <p>Content for Topic 2...</p>
-          </section>
-
-          <section id="topic3" style={{ marginTop: '50px' }}>
-            <h2>Topic 3</h2>
-            <p>Content for Topic 3...</p>
-          </section>
-
-          <section id="topic4" style={{ marginTop: '50px' }}>
-            <h2>Topic 4</h2>
-            <p>Content for Topic 4...</p>
-          </section>
         </div>
       </div>
     </div>
