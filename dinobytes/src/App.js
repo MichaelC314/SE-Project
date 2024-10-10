@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       {/* Top Navbar */}
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" className="fixed-top">
         <Container>
           <Navbar.Brand href="#home">My React App</Navbar.Brand>
           <Nav className="me-auto">
@@ -20,7 +20,7 @@ function App() {
 
       <div className="d-flex">
         {/* Sidebar */}
-        <Nav className="flex-column col-md-3 bg-light p-3">
+        <Nav className="flex-column col-md-3 bg-light p-3 position-sticky" style={{ top: '0' }}>
           <Nav.Link href="#topic1">Topic 1</Nav.Link>
           <Nav.Link href="#topic2">Topic 2</Nav.Link>
           <Nav.Link href="#topic3">Topic 3</Nav.Link>
