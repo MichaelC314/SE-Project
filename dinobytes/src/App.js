@@ -1,7 +1,11 @@
 import React from 'react';
 import { Button, Card, Navbar, Container, Nav } from 'react-bootstrap';
 import logo from './logo.svg';
-import './App.css';
+import './Nav.css';
+import './Sidebar.css';
+import './Button.css';
+import './Main.css';
+import Sidebar from './Sidebar'; // Import the Sidebar component
 
 function App() {
   return (
@@ -20,15 +24,10 @@ function App() {
 
       <div className="d-flex">
         {/* Sidebar */}
-        <Nav className="flex-column col-md-3 bg-light p-3 position-sticky" style={{ top: '0' }}>
-          <Nav.Link href="#topic1">Topic 1</Nav.Link>
-          <Nav.Link href="#topic2">Topic 2</Nav.Link>
-          <Nav.Link href="#topic3">Topic 3</Nav.Link>
-          <Nav.Link href="#topic4">Topic 4</Nav.Link>
-        </Nav>
+        <Sidebar />
 
         {/* Main Content */}
-        <div className="col-md-9 p-4">
+        <div className="main-content col-md-9 p-4" style={{ marginLeft: '250px', marginTop: '56px' }}>
           <header className="App-header">
             <Button variant="primary">Bootstrap Button</Button>
             <Card style={{ width: '18rem', marginTop: '20px' }}>

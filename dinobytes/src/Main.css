@@ -1,0 +1,20 @@
+.main-content {
+    margin-left: 250px; /* Adjust based on sidebar width */
+    margin-top: 56px; /* Adjust based on navbar height */
+    padding: 20px;
+  }
+  
+  .Card {
+    background-color: #FFFFFF; /* White */
+    border-color: #673AB7; /* Deep Purple */
+    color: #212121; /* Dark Gray */
+  }
+  
+  .Card-title {
+    color: #3F51B5; /* Indigo */
+  }
+  
+  .Card-text {
+    color: #212121; /* Dark Gray */
+  }
+  
