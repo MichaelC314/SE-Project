@@ -9,15 +9,15 @@ function App() {
       {/* Top Navbar */}
       <Navbar bg="dark" variant="dark" className="fixed-top">
         <Container>
-          <Navbar.Brand href="#home">Dinobytes</Navbar.Brand>
+          <Navbar.Brand href="#home">My React App</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Lessons</Nav.Link>
-            <Nav.Link href="#pricing">Account</Nav.Link>
+            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
-    
+
       <div className="d-flex">
         {/* Sidebar */}
         <Nav className="flex-column col-md-3 bg-light p-3 position-sticky" style={{ top: '0' }}>
