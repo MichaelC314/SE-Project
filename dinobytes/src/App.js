@@ -30,7 +30,6 @@ function App() {
         {/* Main Content */}
         <div className="col-md-9 p-4">
           <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
             <Button variant="primary">Bootstrap Button</Button>
             <Card style={{ width: '18rem', marginTop: '20px' }}>
               <Card.Img variant="top" src={logo} />
@@ -42,17 +41,6 @@ function App() {
                 <Button variant="primary">Go somewhere</Button>
               </Card.Body>
             </Card>
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
           </header>
         </div>
       </div>
