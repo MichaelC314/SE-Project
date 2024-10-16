@@ -1,20 +1,16 @@
 import React from 'react';
 import { Button, Card, Navbar, Container, Nav } from 'react-bootstrap';
 import logo from './logo.svg';
-import './Nav.css';
-import './Sidebar.css';
-import './Button.css';
 import './Main.css';
-import Sidebar from './Sidebar'; // Import the Sidebar component
 
 function App() {
   return (
     <div className="App">
       {/* Top Navbar */}
       <Navbar bg="dark" variant="dark" className="fixed-top">
-        <Container>
+        <Container fluid>
           <Navbar.Brand href="#home">Dinobytes</Navbar.Brand>
-          <Nav className="me-auto">
+          <Nav className="me-auto navbar-nav">
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#features">Lessons</Nav.Link>
             <Nav.Link href="#pricing">Account</Nav.Link>
@@ -23,9 +19,6 @@ function App() {
       </Navbar>
 
       <div className="d-flex">
-        {/* Sidebar */}
-        <Sidebar />
-
         {/* Main Content */}
         <div className="main-content col-md-9 p-4" style={{ marginLeft: '250px', marginTop: '56px' }}>
           <header className="App-header">

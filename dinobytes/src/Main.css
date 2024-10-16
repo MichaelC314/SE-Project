@@ -1,20 +1,76 @@
+/* Ensure body content is pushed below the fixed navbar */
+body {
+  padding-top: 56px; /* Adjust based on navbar height */
+}
+
+/* Styles for the fixed Navbar and brand */
+.Navbar, .navbar-dark .navbar-brand {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Adjusts margin for the Navbar brand */
+.navbar-brand {
+  margin-left: 20px; /* Adjust margin as needed */
+}
+
+/* Styles for the Navbar navigation links */
+.navbar-nav {
+  margin-left: auto; /* Pushes the nav links to the right */
+  display: flex;
+  gap: 10px;
+}
+
+/* Styles for the main content area */
 .main-content {
-    margin-left: 250px; /* Adjust based on sidebar width */
-    margin-top: 56px; /* Adjust based on navbar height */
-    padding: 20px;
-  }
-  
-  .Card {
-    background-color: #FFFFFF; /* White */
-    border-color: #673AB7; /* Deep Purple */
-    color: #212121; /* Dark Gray */
-  }
-  
-  .Card-title {
-    color: #3F51B5; /* Indigo */
-  }
-  
-  .Card-text {
-    color: #212121; /* Dark Gray */
-  }
-  
+  margin-left: 250px; /* Adjust based on sidebar width */
+  margin-top: 56px; /* Adjust based on navbar height */
+  padding: 20px;
+}
+
+/* Styles for Bootstrap Cards */
+.Card {
+  background-color: #FFFFFF; /* White */
+  border-color: #673AB7; /* Deep Purple */
+  color: #212121; /* Dark Gray */
+}
+
+/* Styles for Card titles */
+.Card-title {
+  color: #3F51B5; /* Indigo */
+}
+
+/* Styles for Card text */
+.Card-text {
+  color: #212121; /* Dark Gray */
+}
+
+/* Styles for primary buttons */
+.button-primary, .btn-primary {
+  background-color: #00BCD4; /* Cyan */
+  border: none;
+  color: white;
+}
+
+/* Hover state for primary buttons */
+.button-primary:hover, .btn-primary:hover {
+  background-color: #A5B4FC; /* Light Blue */
+}
+
+/* Styles for secondary buttons */
+.button-secondary, .btn-secondary {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+}
+
+/* Hover state for secondary buttons */
+.button-secondary:hover, .btn-secondary:hover {
+  background-color: #FFC107; /* Amber */
+}
+
