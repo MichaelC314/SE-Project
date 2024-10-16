@@ -7,6 +7,7 @@
   --dark-gray: #1C1C1C; /* Dark Gray */
 }
 
+/* Main.css */
 
 /* Ensure body content is pushed below the fixed navbar */
 body {
@@ -50,9 +51,12 @@ body {
   line-height: 1; /* Reset line-height */
 }
 
-/* Hover effect for navbar links */
+.nav-link {
+  color: var(--light-gray);
+}
+
 .nav-link:hover {
-  color: var(--light-gray) !important; /* Ensure custom hover color */
+  color: #FFFFFF !important; /* Change hover color to white */
 }
 
 /* Styles for Bootstrap Cards */

@@ -14,12 +14,11 @@ function App() {
           <Navbar.Brand href="#home">Dinobytes</Navbar.Brand>
           <Nav className="me-auto navbar-nav">
             <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#lessos">Lessons</Nav.Link>
+            <Nav.Link href="#lessons">Lessons</Nav.Link>
             <Nav.Link href="#account">Account</Nav.Link>
           </Nav>
-        </Container>  
+        </Container>
       </Navbar>
-
       <div className="d-flex justify-content-center" style={{ marginTop: '70px' }}>
         {/* Main Content */}
         <div className="main-content">
@@ -38,7 +37,6 @@ function App() {
                     </Card.Body>
                   </Card>
                 </Col>
-
                 <Col md="auto">
                   <Card style={{ width: '18rem', marginTop: '20px' }}>
                     <Card.Img variant="top" src={pythonLogo} className="card-img-top" /> {/* Use the Python logo */}
@@ -51,7 +49,6 @@ function App() {
                     </Card.Body>
                   </Card>
                 </Col>
-
                 <Col md="auto">
                   <Card style={{ width: '18rem', marginTop: '20px' }}>
                     <Card.Img variant="top" src={javascriptLogo} className="card-img-top" /> {/* Use the JavaScript logo */}
