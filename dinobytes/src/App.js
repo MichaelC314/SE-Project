@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Card, Navbar, Container, Row, Col, Nav } from 'react-bootstrap';
 import cplusplusLogo from './cpp_logo.png'; // Import your C++ logo
 import pythonLogo from './python_logo.png'; // Import your Python logo
-import javascriptLogo from './js_logo.png'; // Import your JavaScript logo
+import javaLogo from './java_logo.png'; // Import your Java logo
 import './Main.css';
 
 function App() {
@@ -51,11 +51,11 @@ function App() {
                 </Col>
                 <Col md="auto">
                   <Card style={{ width: '18rem', marginTop: '20px' }}>
-                    <Card.Img variant="top" src={javascriptLogo} className="card-img-top" /> {/* Use the JavaScript logo */}
+                    <Card.Img variant="top" src={javaLogo} className="card-img-top" /> {/* Use the Java logo */}
                     <Card.Body>
-                      <Card.Title>JavaScript Course</Card.Title>
+                      <Card.Title>Java Course</Card.Title>
                       <Card.Text>
-                        JavaScript is a dynamic programming language commonly used in web development to create interactive effects within web browsers. Dive into JavaScript and learn how to make your web pages come alive.
+                        Java is a robust, object-oriented programming language used in many enterprise-level applications. Dive into Java and learn how to build reliable and scalable software solutions.
                       </Card.Text>
                       <Button variant="primary">Go to Course</Button>
                     </Card.Body>

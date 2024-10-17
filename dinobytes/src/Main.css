@@ -7,8 +7,6 @@
   --dark-gray: #1C1C1C; /* Dark Gray */
 }
 
-/* Main.css */
-
 /* Ensure body content is pushed below the fixed navbar */
 body {
   padding-top: 56px; /* Adjust based on navbar height */
@@ -71,6 +69,7 @@ body {
   background-color: var(--light-gray);
   border-color: var(--medium-blue);
   color: var(--dark-gray);
+  text-align: center; /* Center the text in the card */
 }
 
 .Card-title {
@@ -79,6 +78,13 @@ body {
 
 .Card-text {
   color: var(--dark-gray);
+}
+
+/* Center the button within the card */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Styles for primary buttons */
