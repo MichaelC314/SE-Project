@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, Card, Navbar, Container, Row, Col, Nav } from 'react-bootstrap';
-import cplusplusLogo from './img/cpp_logo.png'; // Import your C++ logo
-import pythonLogo from './img/python_logo.png'; // Import your Python logo
-import javaLogo from './img/java_logo.png'; // Import your Java logo
-import './Main.css';
+import cplusplusLogo from '../img/cpp_logo.png'; // Import your C++ logo
+import pythonLogo from '../img/python_logo.png'; // Import your Python logo
+import javaLogo from '../img/java_logo.png'; // Import your Java logo
+import '../styles/Main.css';
 
 function App() {
   return (
