@@ -7,9 +7,9 @@ import './Main.css';
 
 function App() {
   return (
-    <div className="App">
+<div className="App">
       {/* Top Navbar */}
-      <Navbar bg="dark" variant="dark" className="fixed-top">
+      <Navbar bg="dark" className="fixed-top">
         <Container fluid>
           <Navbar.Brand href="#home">Dinobytes</Navbar.Brand>
           <Nav className="me-auto navbar-nav">

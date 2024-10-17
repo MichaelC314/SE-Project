@@ -32,12 +32,12 @@ body {
 }
 
 .navbar-brand {
-  margin-top: 8px;
   margin-left: 20px; /* Adjust margin as needed */
   display: flex;
   align-items: center;
   height: 56px; /* Match height with navbar */
   line-height: 1; /* Reset line-height */
+  color: var(--light-gray) !important ;
 }
 
 .navbar-nav {
@@ -49,12 +49,17 @@ body {
   line-height: 1; /* Reset line-height */
 }
 
-.nav-link {
-  color: var(--light-gray);
+/*Navbar Link Styles*/
+.navbar-nav .nav-link {
+  color: var(--light-gray) !important ; /* Default link color */
+  font-weight: 500;
+  transition: color 0.3s ease; /* Smooth color transition */
+  text-decoration: none;
 }
 
-.nav-link:hover {
-  color: #FFFFFF !important; /* Change hover color to white */
+/* Hover Effect */
+.navbar-nav .nav-link:hover {
+  color: var(--light-blue) !important; /*White color on hover */
 }
 
 /* Styles for Bootstrap Cards */
