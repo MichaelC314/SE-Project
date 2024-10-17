@@ -61,7 +61,7 @@ body {
 /* Hover Effect */
 .navbar-nav .nav-link:hover {
   color: var(--light-blue) !important; /*White color on hover */
-  cursor: url('dinocursor.png'), pointer; /* Custom cursor when hovering over buttons */
+  cursor: url('./img/dinocursor.png'), pointer; /* Custom cursor when hovering over buttons */
 }
 
 /* Border RGB animation */
@@ -132,11 +132,11 @@ body {
 }
 .button-primary:hover, .btn-primary:hover {
   background-color: var(--light-blue) !important;
-  cursor: url('dinocursor.png'), pointer !important;
+  cursor: url('./img/dinocursor.png'), pointer !important;
 }
 
 .button-secondary:hover, .btn-secondary:hover {
   background-color: var(--dark-gray) !important;
-  cursor: url('dinocursor.png'), pointer !important;
+  cursor: url('./img/dinocursor.png'), pointer !important;
 }
 
