@@ -7,23 +7,29 @@ import './Main.css';
 
 function App() {
   return (
-<div className="App">
+    <div className="App">
       {/* Top Navbar */}
       <Navbar bg="dark" className="fixed-top">
         <Container fluid>
           <Navbar.Brand href="#home">Dinobytes</Navbar.Brand>
-          <Nav className="me-auto navbar-nav">
+          <Nav className="navbar-nav">
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#lessons">Lessons</Nav.Link>
             <Nav.Link href="#account">Account</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
-      <div className="d-flex justify-content-center" style={{ marginTop: '70px' }}>
+      <div className="d-flex justify-content-center main-content">
         {/* Main Content */}
         <div className="main-content">
           <header className="App-header">
             <Container>
+              <Row className="justify-content-center">
+                <Col md="auto" className="text-center">
+                  <h1>Welcome to Dinobytes</h1>
+                  <p>A site to learn programming and improve your skills.</p>
+                </Col>
+              </Row>
               <Row className="justify-content-center">
                 <Col md="auto">
                   <Card style={{ width: '18rem', marginTop: '20px' }}>
@@ -31,7 +37,7 @@ function App() {
                     <Card.Body>
                       <Card.Title>C++ Course</Card.Title>
                       <Card.Text>
-                        C++ is a powerful general-purpose programming language. It is widely used in software development, game development, and real-time simulations. Learn the fundamentals and advanced concepts of C++ with this course.
+                        C++ is a powerful general-purpose programming language. It is widely used in software development, game development, and real-time simulations.
                       </Card.Text>
                       <Button variant="primary">Go to Course</Button>
                     </Card.Body>
@@ -43,7 +49,7 @@ function App() {
                     <Card.Body>
                       <Card.Title>Python Course</Card.Title>
                       <Card.Text>
-                        Python is a versatile, high-level programming language known for its ease of use and readability. It's widely used in web development, data science, artificial intelligence, and more. Explore the basics and advanced topics of Python in this course.
+                        Python is a versatile, high-level programming language known for its ease of use and readability. It's widely used in web development, data science, artificial intelligence, and more.
                       </Card.Text>
                       <Button variant="primary">Go to Course</Button>
                     </Card.Body>
@@ -71,3 +77,4 @@ function App() {
 }
 
 export default App;
+
