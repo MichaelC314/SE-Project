@@ -12,6 +12,9 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
+
+
 //hello dudes
 //YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 // If you want to start measuring performance in your app, pass a function

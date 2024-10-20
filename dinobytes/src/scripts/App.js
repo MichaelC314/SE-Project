@@ -1,24 +1,61 @@
-import React from 'react';
+import {BrowserRouter as Router, Route, Link, Routes, Outlet} from "react-router-dom";
+import '../styles/Main.css';
+import React, { useState } from 'react';
 import { Button, Card, Navbar, Container, Row, Col, Nav } from 'react-bootstrap';
+import Login from './components/Login.js'
 import cplusplusLogo from '../img/cpp_logo.png'; // Import your C++ logo
 import pythonLogo from '../img/python_logo.png'; // Import your Python logo
 import javaLogo from '../img/java_logo.png'; // Import your Java logo
 import '../styles/Main.css';
+import AccountInfoList from './components/accountInfo-list.js'
+import LoginOverlay from './components/LoginOverlay.js';
+import SignUp from './components/SignUp';
 
-function App() {
-  return (
-    <div className="App">
+function App() {        
+
+  const [showLogin, setShowLogin] = useState(false);
+    const [showSignUp, setShowSignUp] = useState(false);
+
+    // Close both modals when switching between login and signup
+    const openSignUp = () => {
+        setShowLogin(false);
+        setShowSignUp(true);
+    };
+
+    const openLogin = () => {
+        setShowSignUp(false);
+        setShowLogin(true);
+    };
+
+    const closeAllModals = () => {
+        setShowLogin(false);
+        setShowSignUp(false);
+    };
+
+    return(
+      <div className="Home">
       {/* Top Navbar */}
+      <Router>
       <Navbar bg="dark" className="fixed-top">
         <Container fluid>
           <Navbar.Brand href="#home">Dinobytes</Navbar.Brand>
           <Nav className="navbar-nav">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link as={Link} to="../components/Home">Home</Nav.Link>
             <Nav.Link href="#lessons">Lessons</Nav.Link>
             <Nav.Link href="#account">Account</Nav.Link>
+            <Nav.Link onClick={() => setShowLogin(true)}>Login</Nav.Link>
           </Nav>
         </Container>
-      </Navbar>
+      </Navbar> 
+      {/* {showLogin && <LoginOverlay onClose={() => setShowLogin(false)} />} */}
+      {showLogin && <Login onClose={closeAllModals} onSwitchToSignUp={openSignUp} />}
+      {showSignUp && <SignUp onClose={closeAllModals} />}
+        <Routes>
+        <Route path="/signup" element={<SignUp />} />
+        </Routes>
+      </Router> 
+      
+
       <div className="d-flex justify-content-center main-content">
         {/* Main Content */}
         <div className="main-content">
