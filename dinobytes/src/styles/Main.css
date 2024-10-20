@@ -9,7 +9,7 @@
 
 /* Ensure body content is pushed below the fixed navbar */
 body {
-  padding-top: 56px; /* Adjust based on navbar height */
+  padding-top: 76px; /* Adjust based on navbar height */
 }
 
 .App-header {
@@ -115,6 +115,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 250px;
+  
 }
 
 
