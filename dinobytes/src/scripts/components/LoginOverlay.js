@@ -22,39 +22,12 @@ function LoginOverlay({ onClose }) {
     }, [onClose]);
 
     return (
-        <div style={styles.background}>
-            <div ref={containerRef} style={styles.container}>
-                <h2>Login</h2>
-                <Login />
+        <div className="background">
+            <div ref={containerRef} className="login-container">
+                <Login onClose={onClose} />
             </div>
         </div>
     );
 }
-
-// Styles for the overlay and container
-const styles = {
-    background: {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backdropFilter: 'blur(8px)', // Blur effect on the background
-        backgroundColor: 'rgba(0, 0, 0, 0.3)', // Slight dark overlay
-        zIndex: 1000, // Ensure it's on top of everything
-    },
-    container: {
-        width: '300px',
-        textAlign: 'center',
-        border: '1px solid #ccc',
-        borderRadius: '10px',
-        padding: '20px',
-        backgroundColor: 'white',
-        boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.3)',
-    },
-};
 
 export default LoginOverlay;

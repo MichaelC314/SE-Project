@@ -57,10 +57,9 @@ body {
   margin: 0 15px;
 }
 
-
 /* Hover Effect */
 .navbar-nav .nav-link:hover {
-  color: var(--light-blue) !important; /*White color on hover */
+  color: var(--light-blue) !important; /* White color on hover */
   cursor: url('../img/dinocursor.png'), pointer; /* Custom cursor when hovering over buttons */
 }
 
@@ -82,6 +81,7 @@ body {
     border-color: rgb(255, 0, 255); /* Magenta */
   }
 }
+
 /* Styles for Bootstrap Cards */
 .card-img-top {
   width: 100%;
@@ -89,19 +89,22 @@ body {
   object-fit: contain; /* Ensure the image fits within the area without being chopped */
   background-color: var(--light-gray); /* Optional: Add background color to handle transparent images */
 }
+
 .Card {
   background-color: var(--light-gray);
   border-color: var(--medium-blue);
   color: var(--dark-gray);
   text-align: center; /* Center the text in the card */
-  transition: transform .5s ease,/* Smooth transition for scaling */
+  transition: transform .5s ease; /* Smooth transition for scaling */
 }
+
 .card:hover {
   transform: scale(1.05); /* Scales the card to 105% of its original size */
   animation: rgbBorderAnimation 5s infinite;
   transition: transform .5s ease; 
   border: 4px solid; /* Increase border thickness on hover */
 }
+
 .Card-title {
   color: var(--dark-blue);
 }
@@ -116,29 +119,95 @@ body {
   flex-direction: column;
   align-items: center;
   height: 250px;
-  
 }
-
 
 /* Styles for primary buttons */
 .button-primary, .btn-primary {
   background-color: var(--medium-blue) !important;
   border: none;
   color: var(--light-gray) !important;
+  border-radius: 8px; /* Slightly rounded corners */
+  margin-bottom: 10px; /* Space between buttons */
+  padding: 10px; /* Increase padding for better spacing */
+  width: 100%; /* Ensure buttons take full width */
+  max-width: 100%; /* Prevent buttons from shrinking */
 }
+
 /* Styles for secondary buttons */
 .button-secondary, .btn-secondary {
-  background-color: var(--medium-blue ) !important;
+  background-color: var(--medium-blue) !important;
   border: none;
   color: var(--light-gray) !important;
+  border-radius: 8px; /* Slightly rounded corners */
+  margin-bottom: 10px; /* Space between buttons */
+  padding: 10px; /* Increase padding for better spacing */
+  width: 100%; /* Ensure buttons take full width */
+  max-width: 100%; /* Prevent buttons from shrinking */
 }
+
+/* Hover styles for buttons */
 .button-primary:hover, .btn-primary:hover {
   background-color: var(--light-blue) !important;
   cursor: url('../img/dinocursor.png'), pointer !important;
 }
 
 .button-secondary:hover, .btn-secondary:hover {
-  background-color: var(--dark-gray) !important;
+  background-color: var(--light-blue) !important; /* Ensure secondary buttons have the same hover color */
   cursor: url('../img/dinocursor.png'), pointer !important;
 }
 
+/* General Styles */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px); /* Blur effect */
+  background-color: rgba(0, 0, 0, 0.3); /* Overlay */
+  z-index: 999;
+}
+
+.login-container, .signup-container {
+  width: 300px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  z-index: 1000;
+}
+
+.login-form, .signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the form elements */
+}
+
+.input-group {
+  margin-bottom: 15px;
+  width: 100%;
+  text-align: center; /* Center the label text */
+}
+
+label {
+  display: block; /* Ensure the label takes full width */
+  text-align: center; /* Center the text inside the label */
+  width: 100%; /* Ensure the label takes full width */
+}
+
+.input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%; /* Ensure input width stays full */
+  margin-top: 5px;
+}
+
+/* Error Message */
+.error {
+  color: red;
+}
