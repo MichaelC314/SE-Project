@@ -211,3 +211,69 @@ label {
 .error {
   color: red;
 }
+
+
+
+.about-us-container {
+  text-align: center;
+}
+
+.team {
+  margin-top: 20px;
+}
+
+.team ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.team li {
+  margin: 10px 0;
+}
+
+.mascot {
+  margin-top: 10px;
+}
+
+/* Mascot Image Styling */
+.mascot-image {
+  border-radius: 20%; /* Makes the image round */
+  width: 200px; /* Set a fixed width for consistency */
+  height: 200px; /* Set a fixed height to maintain a circular shape */
+  object-fit: cover; /* Ensures the image covers the area without stretching */
+  margin-bottom: 20px; /* Adds some space below the image */
+}
+
+
+.mascot p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+
+/* Custom Team Card */
+.custom-team-card {
+  background-color: var(--light-gray);
+  border: 5px solid var(--medium-blue);
+  border-radius: 8px;
+  color: var(--dark-gray);
+  width: 100%;
+  max-width: 350px; /* Wider cards */
+  height: 380px; /* Adjust height accordingly */
+  margin: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for depth */
+  animation: rgbBorderAnimation 5s infinite; /* Permanent RGB animation */
+}
+
+/* GIF Styling */
+.team-gif {
+  width: 100%; /* Ensure it takes the full width of the card */
+  max-width: 300px; /* Max width for larger GIFs */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 250px; /* Max height to prevent excessive scaling */
+  object-fit: contain; /* Keep the GIF from stretching */
+  margin-top: 10px;
+}
+
+

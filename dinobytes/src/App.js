@@ -6,7 +6,8 @@ import Login from './components/Login.js';
 import AccountInfoList from './components/accountInfo-list.js';
 import LoginOverlay from './components/LoginOverlay.js';
 import SignUp from './components/SignUp';
-import CppCourse from '../CppCourse/CppCourse'; // Ensure correct import
+import CppCourse from '../CppCourse/CppCourse';
+import AboutUs from './AboutUs/AboutUs'; // Import About Us component
 
 import cplusplusLogo from '../img/cpp_logo.png';
 import pythonLogo from '../img/python_logo.png';
@@ -42,7 +43,8 @@ function App() {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/lessons">Lessons</Nav.Link>
             <Nav.Link as={Link} to="/account">Account</Nav.Link>
-            <Nav.Link onClick={() => setShowLogin(true)}>Login</Nav.Link>
+            <Nav.Link as={Link} to="/about-us">About Us</Nav.Link> {/* Added About Us link */}
+            <Nav.Link onClick={openLogin}>Login</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -109,6 +111,7 @@ function App() {
           />
           <Route path="/cpp-course" element={<CppCourse />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/about-us" element={<AboutUs />} /> {/* Added About Us route */}
         </Routes>
       </div>
     </div>
