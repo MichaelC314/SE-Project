@@ -1,25 +1,75 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/Main.css'; // Correct relative path
+import { getDb } from '../services/db.mjs';
+import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import '../../styles/Main.css';
 
 function SignUp({ onClose }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const db = getDb(); 
 
-    const handleSignUp = (e) => {
-        e.preventDefault(); // Prevent page reload
+    // function to validate username and password
+    const validateInputs = () => {
+        if (username.length < 6) {
+            setError("Username must be at least 6 characters long.");
+            return false;
+        }
+        
+        //checks if password meets criteria. Below are special characters
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+=[\]{};':"\\|,.<>/?]).{8,}$/;
+        if (!passwordRegex.test(password)) {
+            setError("Password must be at least 8 characters long, contain one uppercase letter, and one special character.");
+            return false;
+        }
 
-        // Dummy sign-up validation
+        setError('');
+        return true;
+    };
+
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+
+        // check if inputs meet the criteria
+        if (!validateInputs()) {
+            return;
+        }
+
         if (username && password) {
-            alert('SignUp successful!');
-            navigate('/home'); // Redirect to home page
+            try {
+                // Query Firestore to check if the username/password combination already exists
+                const userQuery = query(
+                    collection(db, "accountInfo"),
+                    where("userId", "==", username),
+                    where("password", "==", password)
+                );
+
+                const querySnapshot = await getDocs(userQuery);
+
+                if (!querySnapshot.empty) {
+                    // if matching document found, fail
+                    setError('This username and password combination already exists.');
+                } else {
+                    // If no matching document, proceed with sign-up
+                    await addDoc(collection(db, "accountInfo"), {
+                        userId: username,
+                        password: password
+                    });
+                    alert('SignUp successful!');
+                    navigate('/home'); // Redirect to home page
+                }
+            } catch (error) {
+                console.error("Error adding user to database: ", error);
+                setError('Sign-up failed. Please try again.');
+            }
         } else {
             setError('Please fill all fields');
         }
     };
 
+    //below is formatting stuff.
     const handleClickOutside = useCallback((e) => {
         if (e.target.id === 'overlay') {
             onClose();
@@ -31,7 +81,7 @@ function SignUp({ onClose }) {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [handleClickOutside]); // Include handleClickOutside in the dependency array
+    }, [handleClickOutside]);
 
     return (
         <div id="overlay" className="background">

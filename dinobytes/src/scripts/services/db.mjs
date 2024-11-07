@@ -8,7 +8,7 @@ let db = false;
 export const getDb = () => {
 
     if (!db){
-
+    console.log("Initializing Firebase...");
         const firebaseConfig = {
 
             apiKey: "AIzaSyDBooqyYdSeU3os9fJadodTTrOXLcmAbno",
@@ -28,15 +28,18 @@ export const getDb = () => {
           };
 
           
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-
-        const analytics = getAnalytics(app);
-
-        db = getFirestore(app)
-
+          try {
+            const app = initializeApp(firebaseConfig);
+            getAnalytics(app); // Initialize analytics if needed
+            db = getFirestore(app);
+            console.log("Firebase initialized successfully.");
+        } catch (error) {
+            console.error("Error initializing Firebase: ", error); // Log initialization errors
+        }
     }
 
-    return db;
+        return db;
+    }
 
-}
+   
+

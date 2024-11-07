@@ -58,7 +58,7 @@ const AboutUs = () => {
         {/* Team Card 4 */}
         <div className="col-md-4 d-flex justify-content-center">
           <div className="custom-team-card">
-            <h5 className="card-title">Philipe: Backend</h5>
+            <h5 className="card-title">Philippe: Backend</h5>
             <img 
               src={require('../img/philipe.gif')} 
               alt="Philipe's chosen GIF" 
