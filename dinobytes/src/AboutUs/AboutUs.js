@@ -21,13 +21,21 @@ const AboutUs = () => {
       <div className="team row justify-content-center">
         {/* Team Card 1 */}
         <div className="col-md-4">
-          <div className="custom-team-card">
+        <div 
+    className="custom-team-card" 
+    style={{
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}
+  >
             <h5 className="card-title">Cooper: Frontend</h5>
             <img 
-              src={require('../img/cooper.gif')} 
-              alt="Cooper's chosen GIF" 
-              className="team-gif" 
-            />
+  src={require('../img/cooper.gif')} 
+  alt="Cooper's chosen GIF" 
+  className="team-gif" 
+  
+/>
           </div>
         </div>
 
