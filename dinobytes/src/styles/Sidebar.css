@@ -29,6 +29,6 @@
 
 .sidebar-link.active {
   background-color: #d4edda !important; /* Highlight color for active topic */
-  border-color: #c3e6cb !important; /* Border color for active topic */
+  border-color: #e4af69 !important; /* Border color for active topic */
   font-weight: bold !important;
 }
