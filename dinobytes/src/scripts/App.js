@@ -61,6 +61,12 @@ function App() {
     }
   };
 
+  const handleLoginSuccess = (id) => {
+    setIsLoggedIn(true);
+    setUserId(id);
+    closeAllModals();
+};
+
   return (
     <div className="Home">
       {/* Navbar */}
@@ -73,7 +79,7 @@ function App() {
             {isLoggedIn ? (
               <Nav.Link as={Link} to="/account">Account</Nav.Link> 
             ) : (
-              <Nav.Link onClick={openLogin}>Login</Nav.Link>
+              <Nav.Link onClick={openLogin}>Login/Signup</Nav.Link>
             )}
             <Nav.Link as={Link} to="/about-us">About Us</Nav.Link> {/* Added About Us link */}
           </Nav>
@@ -92,7 +98,12 @@ function App() {
         }}
         />
       )}
-      {showSignUp && <SignUp onClose={closeAllModals} />}
+      {showSignUp && (
+                <SignUp
+                    onClose={closeAllModals}
+                    onLoginSuccess={handleLoginSuccess} // Pass login success handler to SignUp
+                />
+       )}
 
       {/* Routes */}
       <div className="d-flex justify-content-center main-content">

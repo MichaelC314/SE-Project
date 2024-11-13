@@ -4,7 +4,7 @@ import { getDb } from '../services/db.mjs';
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import '../../styles/Main.css';
 
-function SignUp({ onClose }) {
+function SignUp({ onClose, onLoginSuccess }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -53,12 +53,14 @@ function SignUp({ onClose }) {
                     setError('This username and password combination already exists.');
                 } else {
                     // If no matching document, proceed with sign-up
-                    await addDoc(collection(db, "accountInfo"), {
+                    const newUser = await addDoc(collection(db, "accountInfo"), {
                         userId: username,
                         password: password
                     });
                     alert('SignUp successful!');
-                    navigate('/home'); // Redirect to home page
+                    onLoginSuccess(newUser.id)
+                    onClose();
+                    navigate('/'); // Redirect to home page
                 }
             } catch (error) {
                 console.error("Error adding user to database: ", error);
