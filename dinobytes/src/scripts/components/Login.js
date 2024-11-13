@@ -3,7 +3,7 @@ import { getDb } from '../services/db.mjs';
 import { collection, query, where, getDocs } from "firebase/firestore"; 
 import '../../styles/Main.css';
 
-function Login({ onClose, onSwitchToSignUp }) {
+function Login({ onClose, onSwitchToSignUp, onLoginSuccess  }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -30,8 +30,14 @@ function Login({ onClose, onSwitchToSignUp }) {
             // check documents
             if (!querySnapshot.empty) {
                 alert('Login successful!');
+                console.log("User ID:", username);
+                const userDoc = querySnapshot.docs[0];
+                const userId = userDoc.id;
+                console.log("Retrieved userId on login:", userId);
+                onLoginSuccess(userId); // set login status to true
                 onClose(); // close the login box after success
             } else {
+                
                 setError('Invalid username or password');
             }
         } catch (error) {

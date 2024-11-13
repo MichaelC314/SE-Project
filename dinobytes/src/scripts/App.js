@@ -8,6 +8,10 @@ import LoginOverlay from './components/LoginOverlay.js';
 import SignUp from './components/SignUp';
 import CppCourse from '../CppCourse/CppCourse';
 import AboutUs from '../AboutUs/AboutUs'; // Import About Us component
+import Account from './components/Account';
+
+import { getDb } from './services/db.mjs'; 
+import { doc, deleteDoc } from "firebase/firestore";
 
 import cplusplusLogo from '../img/cpp_logo.png';
 import pythonLogo from '../img/python_logo.png';
@@ -16,7 +20,10 @@ import javaLogo from '../img/java_logo.png';
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); //trakcs user's login status
   const navigate = useNavigate();
+  const db = getDb();
+  const [userId, setUserId] = useState(null);
 
   const openSignUp = () => {
     setShowLogin(false);
@@ -33,6 +40,27 @@ function App() {
     setShowSignUp(false);
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false); // Update login status
+    navigate('/'); // Redirect to the homepage
+    setTimeout(() => navigate('/'), 0);
+  };
+
+  const deleteAccount = async () => {
+    if (userId) {
+      try {
+        console.log("Attempting to delete user with userId:", userId);
+        await deleteDoc(doc(db, "accountInfo", userId)); // Delete user document
+        handleLogout(); // Log out after deletion
+      } catch (error) {
+        console.error("Error deleting account: ", error);
+        alert("Failed to delete account. Please try again.");
+      }
+    } else {
+      alert("No user ID found.");
+    }
+  };
+
   return (
     <div className="Home">
       {/* Navbar */}
@@ -42,15 +70,28 @@ function App() {
           <Nav className="navbar-nav">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/lessons">Lessons</Nav.Link>
-            <Nav.Link as={Link} to="/account">Account</Nav.Link>
+            {isLoggedIn ? (
+              <Nav.Link as={Link} to="/account">Account</Nav.Link> 
+            ) : (
+              <Nav.Link onClick={openLogin}>Login</Nav.Link>
+            )}
             <Nav.Link as={Link} to="/about-us">About Us</Nav.Link> {/* Added About Us link */}
-            <Nav.Link onClick={openLogin}>Login</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
 
       {/* Modals */}
-      {showLogin && <Login onClose={closeAllModals} onSwitchToSignUp={openSignUp} />}
+      {showLogin && (
+        <Login
+        onClose={closeAllModals}
+        onSwitchToSignUp={openSignUp}
+        onLoginSuccess={(userId) => {
+          setIsLoggedIn(true);
+          setUserId(userId);
+          closeAllModals();
+        }}
+        />
+      )}
       {showSignUp && <SignUp onClose={closeAllModals} />}
 
       {/* Routes */}
@@ -111,6 +152,7 @@ function App() {
           />
           <Route path="/cpp-course" element={<CppCourse />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/account" element={<Account onLogout={handleLogout} onDeleteAccount={deleteAccount} />} />
           <Route path="/about-us" element={<AboutUs />} /> {/* Added About Us route */}
         </Routes>
       </div>
