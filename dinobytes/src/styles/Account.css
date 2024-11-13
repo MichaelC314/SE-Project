@@ -1,0 +1,40 @@
+/* Centered panel styling for Account page */
+.account-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height for centering */
+    background-color: #f0f0f0; /* Light background for contrast */
+}
+
+/* Enlarged and centered button panel */
+.button-panel {
+    background-color: #9caf88; /* Sage green */
+    width: 400px; /* Increased width for a larger panel */
+    padding: 40px; /* Increased padding for a more substantial look */
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+/* Styling for buttons inside the button panel */
+.account-button {
+    background-color: #ffffff; /* White background for buttons */
+    border: none;
+    color: #5b6650; /* Dark sage text color */
+    font-size: 18px; /* Slightly larger font */
+    padding: 12px 20px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    width: 100%; /* Full width of the button panel */
+    text-align: center;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for buttons */
+.account-button:hover {
+    background-color: #8a9b74; /* Slightly darker sage green on hover */
+}
