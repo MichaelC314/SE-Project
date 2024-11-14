@@ -298,3 +298,77 @@ label {
 }
 
 
+
+/* Reset some default styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: white; /* Set the background to white */
+}
+
+/* Ensure the account page content is positioned properly */
+.account-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content to the top */
+  align-items: center; /* Center the card horizontally */
+  height: 100vh; /* Make the page take up full viewport height */
+  background-color: white; /* Set background to white */
+  padding: 0;
+  margin: 0;
+}
+
+/* Profile card styling */
+.profile-card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px; /* Limit width to maintain layout */
+  background-color: white; /* Ensure the card has a white background */
+  margin-top: 0; /* No margin at the top */
+}
+
+/* Profile image styling */
+.profile-img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-top: 0; /* Remove any margin on top of the image */
+}
+
+/* Info card without border */
+.info-card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Apply dark gray border specifically to the account card */
+.account-card {
+  border: 2px solid var(--dark-gray) !important; /* Dark gray border */
+  box-shadow: none !important; /* Remove box shadow if it was conflicting */
+  padding: 20px; /* Add padding to make sure there's enough space around the content */
+}
+
+/* Prevent border color change on hover */
+.account-card:hover {
+  border: 2px solid var(--dark-gray) !important; /* Keep the dark gray border on hover */
+  box-shadow: none !important; /* Prevent box shadow from appearing */
+  transition: none !important;
+  transform: none !important;
+}
+
+
+/* Button hover styling */
+.account-card .btn:hover {
+  background-color: var(--light-blue) !important;
+  cursor: url('../img/dinocursor.png'), pointer !important;
+}
+
+/* Remove any unwanted padding or margin from surrounding elements */
+body, .account-page, .profile-card {
+  background-color: white !important; /* Ensures the background is white */
+  margin: 0;
+  padding: 0;
+}
