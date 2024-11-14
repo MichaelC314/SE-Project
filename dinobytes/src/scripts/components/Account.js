@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getDb } from '../services/db.mjs';
 import { doc, updateDoc } from 'firebase/firestore';
+import { encryptData } from './Encryption';
 import '../../styles/Account.css'; // Create a new CSS file for Account-specific styles
 
 function Account({ onLogout, onDeleteAccount, userId}) {
@@ -23,7 +24,10 @@ function Account({ onLogout, onDeleteAccount, userId}) {
         try {
             const userRef = doc(db, "accountInfo", userId);
             console.log("Updating password for user ID:", userId); 
-            await updateDoc(userRef, { password: newPassword });
+
+            const { iv, encryptedData } = await encryptData(newPassword);
+
+            await updateDoc(userRef, { password: encryptedData, iv: iv });
             alert("Password updated successfully!");
             setShowChangePassword(false); // Close the modal
             setNewPassword(''); // Reset input
