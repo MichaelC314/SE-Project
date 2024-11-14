@@ -299,14 +299,6 @@ label {
 
 
 
-/* Reset some default styles */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background-color: white; /* Set the background to white */
-}
-
 /* Ensure the account page content is positioned properly */
 .account-page {
   display: flex;
@@ -356,7 +348,7 @@ html, body {
   border: 2px solid var(--dark-gray) !important; /* Keep the dark gray border on hover */
   box-shadow: none !important; /* Prevent box shadow from appearing */
   transition: none !important;
-  transform: none !important;
+  transform: none !impo;
 }
 
 
@@ -366,9 +358,4 @@ html, body {
   cursor: url('../img/dinocursor.png'), pointer !important;
 }
 
-/* Remove any unwanted padding or margin from surrounding elements */
-body, .account-page, .profile-card {
-  background-color: white !important; /* Ensures the background is white */
-  margin: 0;
-  padding: 0;
-}
+
