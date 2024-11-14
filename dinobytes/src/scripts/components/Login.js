@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getDb } from '../services/db.mjs'; 
 import { collection, query, where, getDocs } from "firebase/firestore"; 
+import { decryptData } from './Encryption';
 import '../../styles/Main.css';
 
 function Login({ onClose, onSwitchToSignUp, onLoginSuccess  }) {
@@ -18,24 +19,34 @@ function Login({ onClose, onSwitchToSignUp, onLoginSuccess  }) {
         }
 
         try {
+            // Add Decryption
+
+
             // create a Firestore query to find the user with the specified username and password
             const userQuery = query(
                 collection(db, "accountInfo"),
-                where("userId", "==", username),
-                where("password", "==", password)
+                where("userId", "==", username)
             );
 
             const querySnapshot = await getDocs(userQuery);
 
             // check documents
             if (!querySnapshot.empty) {
-                alert('Login successful!');
-                console.log("User ID:", username);
                 const userDoc = querySnapshot.docs[0];
-                const userId = userDoc.id;
-                console.log("Retrieved userId on login:", userId);
-                onLoginSuccess(userId); // set login status to true
-                onClose(); // close the login box after success
+                const { password: encryptedPassword, iv } = userDoc.data(); // Retrieve the encrypted password and IV
+
+                const decryptedPassword = await decryptData(encryptedPassword, iv);
+
+                if (decryptedPassword === password) {
+                    alert('Login successful!');
+                    console.log("User ID:", username);
+                    const userId = userDoc.id;
+                    console.log("Retrieved userId on login:", userId);
+                    onLoginSuccess(userId); // set login status to true
+                    onClose(); // close the login box after success
+                } else {
+                    setError("Invalid username or password")
+                }
             } else {
                 
                 setError('Invalid username or password');
