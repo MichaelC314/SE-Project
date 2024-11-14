@@ -163,7 +163,7 @@ function App() {
           />
           <Route path="/cpp-course" element={<CppCourse />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/account" element={<Account onLogout={handleLogout} onDeleteAccount={deleteAccount} />} />
+          <Route path="/account" element={<Account onLogout={handleLogout} onDeleteAccount={deleteAccount} userId={userId} />} />
           <Route path="/about-us" element={<AboutUs />} /> {/* Added About Us route */}
         </Routes>
       </div>
