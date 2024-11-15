@@ -143,6 +143,7 @@ function App() {
           <Route path="/account" element={<Account onLogout={handleLogout} userId={userId} />} />
           <Route path="/about-us" element={<AboutUs />} />
           
+          
           {/* Temporary route for AccountTest */}
           {skipLoginForStyling && (
             <Route path="/account-test" element={<AccountTest />} />
