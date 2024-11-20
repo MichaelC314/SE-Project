@@ -18,6 +18,9 @@ function CppCourse() {
     return JSON.parse(localStorage.getItem('cppCourseProgress')) || {};
   });
 
+  // Calculate the tally of completed lessons
+  const completedCount = Object.values(progress).filter(Boolean).length;
+
   // Content for each topic
   const topicContent = {
     "Introduction to C++": "Welcome to the C++ Course! Start learning advanced concepts and build amazing projects.",
@@ -34,21 +37,32 @@ function CppCourse() {
   };
 
   return (
-    <div className="d-flex">
+    <div className="d-flex" style={{ minHeight: '100vh', flexDirection: 'column' }}>
       <Sidebar topics={cppTopics} onSelectTopic={setSelectedTopic} />
-      <div className="course-page" style={{ marginLeft: '250px', padding: '20px' }}>
+      <div className="course-page" style={{ marginLeft: '250px', padding: '20px', flex: 1 }}>
         <h1>C++ Course</h1>
         <p>{topicContent[selectedTopic]}</p>
-        <div style={{ marginTop: '20px' }}>
-          <label>
-            <input
-              type="checkbox"
-              checked={progress[selectedTopic] || false}
-              onChange={handleCheckboxChange}
-            />
-            Mark as Completed
-          </label>
-        </div>
+      </div>
+      <div style={{
+        position: 'fixed',
+        bottom: 0,
+        width: '75%',
+        backgroundColor: '#f8f9fa',
+        padding: '10px 20px',
+        borderTop: '1px solid #ddd',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        <label>
+          <input
+            type="checkbox"
+            checked={progress[selectedTopic] || false}
+            onChange={handleCheckboxChange}
+          />
+          Mark "{selectedTopic}" as Completed
+        </label>
+        <p><strong>Completed Lessons:</strong> {completedCount} / {cppTopics.length}</p>
       </div>
     </div>
   );
