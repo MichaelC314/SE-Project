@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../scripts/Sidebar';
 import '../styles/Sidebar.css';
+import meteorGif from '../img/meteor.gif'; 
 
 const cppTopics = [
   "Introduction to C++",
@@ -36,6 +37,9 @@ function CppCourse() {
     localStorage.setItem('cppCourseProgress', JSON.stringify(updatedProgress));
   };
 
+  // Dynamically calculate the size of the meteor GIF based on completedCount
+  const meteorSize = 100 + completedCount * 20; // Base size + incremental size per completed topic, will make it move across the screen at a later time
+
   return (
     <div className="d-flex" style={{ minHeight: '100vh', flexDirection: 'column' }}>
       <Sidebar topics={cppTopics} onSelectTopic={setSelectedTopic} />
@@ -44,9 +48,28 @@ function CppCourse() {
         <p>{topicContent[selectedTopic]}</p>
       </div>
       <div style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+        <img
+          src={meteorGif}
+          alt="Meteor Progress Indicator"
+          style={{
+            width: `${meteorSize}px`,
+            height: `${meteorSize}px`,
+            transition: 'width 0.3s ease, height 0.3s ease',
+          }}
+        />
+      </div>
+      <div style={{
         position: 'fixed',
         bottom: 0,
-        width: '75%',
+        width: '80%',
         backgroundColor: '#f8f9fa',
         padding: '10px 20px',
         borderTop: '1px solid #ddd',
