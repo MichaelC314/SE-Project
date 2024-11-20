@@ -1,5 +1,5 @@
-// CppCourse.js
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../scripts/Sidebar';
 import '../styles/Sidebar.css';
 
@@ -13,6 +13,10 @@ const cppTopics = [
 
 function CppCourse() {
   const [selectedTopic, setSelectedTopic] = useState("Introduction to C++");
+  const [progress, setProgress] = useState(() => {
+    // Load progress from local storage or initialize empty
+    return JSON.parse(localStorage.getItem('cppCourseProgress')) || {};
+  });
 
   // Content for each topic
   const topicContent = {
@@ -23,12 +27,28 @@ function CppCourse() {
     "Object-Oriented Programming": "C++ supports object-oriented programming, which helps you create reusable code using classes and objects."
   };
 
+  const handleCheckboxChange = () => {
+    const updatedProgress = { ...progress, [selectedTopic]: !progress[selectedTopic] };
+    setProgress(updatedProgress);
+    localStorage.setItem('cppCourseProgress', JSON.stringify(updatedProgress));
+  };
+
   return (
     <div className="d-flex">
       <Sidebar topics={cppTopics} onSelectTopic={setSelectedTopic} />
       <div className="course-page" style={{ marginLeft: '250px', padding: '20px' }}>
         <h1>C++ Course</h1>
         <p>{topicContent[selectedTopic]}</p>
+        <div style={{ marginTop: '20px' }}>
+          <label>
+            <input
+              type="checkbox"
+              checked={progress[selectedTopic] || false}
+              onChange={handleCheckboxChange}
+            />
+            Mark as Completed
+          </label>
+        </div>
       </div>
     </div>
   );
