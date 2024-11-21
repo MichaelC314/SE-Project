@@ -5,6 +5,7 @@
     align-items: center;
     height: 100vh; /* Full viewport height for centering */
     background-color: #f0f0f0; /* Light background for contrast */
+    overflow: hidden;
 }
 
 /* Enlarged and centered button panel */
