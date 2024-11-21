@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
-import { Button, Card, Navbar, Container, Row, Col, Nav } from 'react-bootstrap';
-import '../styles/Main.css';
-import Login from './components/Login.js';
-import AccountInfoList from './components/accountInfo-list.js';
-import LoginOverlay from './components/LoginOverlay.js';
-import SignUp from './components/SignUp';
-import CppCourse from '../CppCourse/CppCourse';
-import AboutUs from '../AboutUs/AboutUs'; // Import About Us component
-import AccountTest from '../Account/AccountTest.js';
-import Account from './components/Account';
+import React, { useState } from "react";
+import { Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
+import { Button, Card, Navbar, Container, Row, Col, Nav } from "react-bootstrap";
+import "../styles/Main.css";
+import Login from "./components/Login.js";
+import AccountInfoList from "./components/accountInfo-list.js";
+import LoginOverlay from "./components/LoginOverlay.js";
+import SignUp from "./components/SignUp";
+import CppCourse from "./components/CppCourse.js";
+import AboutUs from "../AboutUs/AboutUs"; // Import About Us component
+import AccountTest from "../Account/AccountTest.js";
+import Account from "./components/Account";
 
-import cplusplusLogo from '../img/cpp_logo.png';
-import pythonLogo from '../img/python_logo.png';
-import javaLogo from '../img/java_logo.png';
+import cplusplusLogo from "../img/cpp_logo.png";
+import pythonLogo from "../img/python_logo.png";
+import javaLogo from "../img/java_logo.png";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation(); // Get the current route
   const [userId, setUserId] = useState(null);
 
-  // Skip database initialization and login check for styling testing
   const skipLoginForStyling = true; // Set to true for testing styling
 
   const openSignUp = () => {
@@ -42,7 +42,7 @@ function App() {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    navigate('/');
+    navigate("/");
   };
 
   const handleLoginSuccess = (id) => {
@@ -53,21 +53,41 @@ function App() {
 
   return (
     <div className="Home">
-      <Navbar bg="dark" className="fixed-top">
-        <Container fluid>
-          <Navbar.Brand as={Link} to="/">Dinobytes</Navbar.Brand>
-          <Nav className="navbar-nav">
-            <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link as={Link} to="/lessons">Lessons</Nav.Link>
-            {isLoggedIn ? (
-              <Nav.Link as={Link} to="/account">Account</Nav.Link> 
-            ) : (
-              <Nav.Link onClick={openLogin}>Login/Signup</Nav.Link>
-            )}
-            <Nav.Link as={Link} to="/about-us">About Us</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
+      {/* Conditional rendering for the navbar or the sage green banner */}
+      {location.pathname === "/cpp-course" ? (
+        <div
+          style={{
+            backgroundColor: "#98A886", // Sage green color
+            color: "white",
+            padding: "10px 20px",
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: "1.2rem",
+            position: "fixed",
+            top: 0,
+            width: "100%",
+            zIndex: 1050, // Same z-index as the navbar
+          }}
+        >
+          
+        </div>
+      ) : (
+        <Navbar bg="dark" className="fixed-top">
+          <Container fluid>
+            <Navbar.Brand as={Link} to="/">Dinobytes</Navbar.Brand>
+            <Nav className="navbar-nav">
+              <Nav.Link as={Link} to="/">Home</Nav.Link>
+              <Nav.Link as={Link} to="/lessons">Lessons</Nav.Link>
+              {isLoggedIn ? (
+                <Nav.Link as={Link} to="/account">Account</Nav.Link>
+              ) : (
+                <Nav.Link onClick={openLogin}>Login/Signup</Nav.Link>
+              )}
+              <Nav.Link as={Link} to="/about-us">About Us</Nav.Link>
+            </Nav>
+          </Container>
+        </Navbar>
+      )}
 
       {/* Modals */}
       {showLogin && (
@@ -103,19 +123,21 @@ function App() {
                 </Row>
                 <Row className="justify-content-center">
                   <Col md="auto">
-                    <Card style={{ width: '18rem', marginTop: '20px' }}>
+                    <Card style={{ width: "18rem", marginTop: "20px" }}>
                       <Card.Img variant="top" src={cplusplusLogo} className="card-img-top" />
                       <Card.Body>
                         <Card.Title>C++ Course</Card.Title>
-                        <Card.Text>C++ is a powerful general-purpose programming language used in many domains.</Card.Text>
-                        <Button variant="primary" onClick={() => navigate('/cpp-course')}>
+                        <Card.Text>
+                          C++ is a powerful general-purpose programming language used in many domains.
+                        </Card.Text>
+                        <Button variant="primary" onClick={() => navigate("/cpp-course")}>
                           Go to Course
                         </Button>
                       </Card.Body>
                     </Card>
                   </Col>
                   <Col md="auto">
-                    <Card style={{ width: '18rem', marginTop: '20px' }}>
+                    <Card style={{ width: "18rem", marginTop: "20px" }}>
                       <Card.Img variant="top" src={pythonLogo} className="card-img-top" />
                       <Card.Body>
                         <Card.Title>Python Course</Card.Title>
@@ -125,7 +147,7 @@ function App() {
                     </Card>
                   </Col>
                   <Col md="auto">
-                    <Card style={{ width: '18rem', marginTop: '20px' }}>
+                    <Card style={{ width: "18rem", marginTop: "20px" }}>
                       <Card.Img variant="top" src={javaLogo} className="card-img-top" />
                       <Card.Body>
                         <Card.Title>Java Course</Card.Title>
@@ -138,18 +160,31 @@ function App() {
               </Container>
             }
           />
-          <Route path="/cpp-course" element={<CppCourse />} />
+          <Route path="/cpp-course" element={<CppCourse userId={userId} />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/account" element={<Account onLogout={handleLogout} userId={userId} />} />
           <Route path="/about-us" element={<AboutUs />} />
-          
-          
+
           {/* Temporary route for AccountTest */}
-          {skipLoginForStyling && (
-            <Route path="/account-test" element={<AccountTest />} />
-          )}
+          {skipLoginForStyling && <Route path="/account-test" element={<AccountTest />} />}
         </Routes>
       </div>
+
+      {/* Home Button on Bottom Left */}
+      {location.pathname === "/cpp-course" && (
+        <Button
+          variant="success"
+          style={{
+            position: "fixed",
+            bottom: "20px",
+            left: "20px",
+            zIndex: 1050,
+          }}
+          onClick={() => navigate("/")}
+        >
+          Home
+        </Button>
+      )}
     </div>
   );
 }

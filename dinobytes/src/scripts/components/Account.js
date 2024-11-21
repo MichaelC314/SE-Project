@@ -1,17 +1,19 @@
-import React, { useState, useEffect  } from 'react';
-import { getDb } from '../services/db.mjs'
+import React, { useState, useEffect } from 'react';
+import { getDb } from '../services/db.mjs';
 import { doc, getDoc } from "firebase/firestore";
+import { getAuth, signOut } from "firebase/auth"; // Import Firebase Auth methods
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import '../../styles/Main.css';
-import profilePic from '../../img/pfp.jpg';
+import profilePic from '../../img/jake.jpg';
 
-function AccountTest({ onLogout, onDeleteAccount, userId }) {
+function AccountTest({ onDeleteAccount, userId }) {
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [newPassword, setNewPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [username, setUsername] = useState(''); 
+  const [username, setUsername] = useState('');
 
   const db = getDb();
+  const auth = getAuth(); // Initialize Firebase Auth
 
   useEffect(() => {
     // Fetch username from Firestore based on userId
@@ -32,6 +34,16 @@ function AccountTest({ onLogout, onDeleteAccount, userId }) {
     fetchUsername();
   }, [userId, db]);
 
+  const handleLogout = async () => {
+    try {
+      await signOut(auth); // Sign the user out
+      console.log("User logged out successfully.");
+      // redirect to le home
+      window.location.href = "/"; 
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
 
   const validatePassword = (password) => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+=[\]{};':"\\|,.<>/?]).{8,}$/;
@@ -53,10 +65,14 @@ function AccountTest({ onLogout, onDeleteAccount, userId }) {
     <Container className="account-page">
       <Card className="account-card">
         <div className="text-center">
-          <img 
-            src={profilePic}
-            alt="Profile"
-            className="profile-img"
+          <img
+             src={profilePic}
+             alt="Profile"
+             className="profile-img"
+             style={{
+               transform: "scale(1.25)", // Increase size by 1.25x
+               transition: "transform 0.3s ease-in-out", // Smooth transition
+             }}
           />
         </div>
 
@@ -64,7 +80,7 @@ function AccountTest({ onLogout, onDeleteAccount, userId }) {
           <h3 className="text-center">{username || "Loading..."}</h3>
           <Row>
             <Col>
-              <Button className="account-button" onClick={onLogout}>
+              <Button className="account-button" onClick={handleLogout}>
                 Log Out
               </Button>
             </Col>
