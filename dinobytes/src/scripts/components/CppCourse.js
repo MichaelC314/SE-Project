@@ -16,11 +16,7 @@ const cppTopics = [
 function CppCourse({ userId }) {
   const [selectedTopic, setSelectedTopic] = useState("Introduction to C++");
   const [progress, setProgress] = useState({});
-  const db = getDb(); // Initialize Firestore DB
-
-  // Debug Firestore instance and userId
-  console.log("Firestore instance (db):", db);
-  console.log("User ID passed to component:", userId);
+  const db = getDb();
 
   useEffect(() => {
     if (!db || !userId) {
@@ -32,9 +28,10 @@ function CppCourse({ userId }) {
     const fetchProgress = async () => {
       try {
         const docRef = doc(db, "accountInfo", userId);
-        const userDoc = await getDoc(doc(db, "accountInfo", userId));
+        const userDoc = await getDoc(docRef);
         if (userDoc.exists()) {
-          setProgress(userDoc.data().cppProgress || {});
+          const currentProgress = userDoc.data().cppProgress || 0; // Default to 0 if not set
+          setProgress(currentProgress);
         } else {
           console.error("No such user document!");
         }
@@ -47,22 +44,31 @@ function CppCourse({ userId }) {
   }, [userId, db]);
 
   const handleCheckboxChange = async () => {
-    const updatedProgress = { ...progress, [selectedTopic]: !progress[selectedTopic] };
-    setProgress(updatedProgress);
-
     if (!db || !userId) {
       console.error("Firestore DB or User ID is missing.");
       return;
     }
 
-    // Update Firestore
     try {
+      // Fetch the current cppProgress from Firestore
       const docRef = doc(db, "accountInfo", userId);
-      console.log("Firestore docRef created:", doc(db, "accountInfo", userId));
-      await updateDoc(docRef, { cppProgress: updatedProgress });
-      console.log("Progress updated successfully in Firestore!");
+      const userDoc = await getDoc(docRef);
+      const currentProgress = userDoc.exists() ? userDoc.data().cppProgress || 0 : 0;
+
+      // Calculate the new progress sum
+      const isTopicCompleted = progress[selectedTopic] || false;
+      const progressIncrement = isTopicCompleted ? -1 : 1; // Subtract 1 if unchecking, add 1 if checking
+      const updatedProgressSum = currentProgress + progressIncrement;
+
+      // Update the progress in local state and Firestore
+      setProgress((prev) => ({
+        ...prev,
+        [selectedTopic]: !isTopicCompleted,
+      }));
+      await updateDoc(docRef, { cppProgress: updatedProgressSum });
+
+      console.log("Progress updated successfully:", updatedProgressSum);
     } catch (error) {
-      console.log("User ID:", userId);
       console.error("Error updating progress in Firestore:", error);
     }
   };
