@@ -275,7 +275,7 @@ label {
 /* Custom Team Card */
 .custom-team-card {
   background-color: var(--light-gray);
-  border: 5px solid var(--medium-blue);
+  border: 1px solid var(--medium-blue);
   border-radius: 8px;
   color: var(--dark-gray);
   width: 100%;
@@ -283,8 +283,6 @@ label {
   height: 380px; /* Adjust height accordingly */
   margin: 10px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for depth */
-  animation: rgbBorderAnimation 5s infinite; /* Permanent RGB animation */
 }
 
 /* GIF Styling */
@@ -313,8 +311,7 @@ label {
 
 /* Profile card styling */
 .profile-card {
-  border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--dark-blue)!important;
   width: 100%;
   max-width: 600px; /* Limit width to maintain layout */
   background-color: white; /* Ensure the card has a white background */
