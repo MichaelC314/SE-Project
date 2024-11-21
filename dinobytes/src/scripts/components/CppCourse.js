@@ -24,13 +24,16 @@ function CppCourse({ userId }) {
       return;
     }
 
+    // Reset progress to avoid stale data yippeee
+    setProgress({});
+
     // Load progress from Firestore
     const fetchProgress = async () => {
       try {
         const docRef = doc(db, "accountInfo", userId);
         const userDoc = await getDoc(docRef);
         if (userDoc.exists()) {
-          const currentProgress = userDoc.data().cppProgress || 0; // Default to 0 if not set
+          const currentProgress = userDoc.data().cppProgress || {}; // Default to empty object
           setProgress(currentProgress);
         } else {
           console.error("No such user document!");
@@ -41,7 +44,7 @@ function CppCourse({ userId }) {
     };
 
     fetchProgress();
-  }, [userId, db]);
+  }, [userId, db]); // Refetch progress when userId changes
 
   const handleCheckboxChange = async () => {
     if (!db || !userId) {
@@ -50,24 +53,17 @@ function CppCourse({ userId }) {
     }
 
     try {
-      // Fetch the current cppProgress from Firestore
+      const updatedProgress = {
+        ...progress,
+        [selectedTopic]: !progress[selectedTopic], // Toggle the current topic's status
+      };
+      setProgress(updatedProgress);
+
+      // Update Firestore
       const docRef = doc(db, "accountInfo", userId);
-      const userDoc = await getDoc(docRef);
-      const currentProgress = userDoc.exists() ? userDoc.data().cppProgress || 0 : 0;
+      await updateDoc(docRef, { cppProgress: updatedProgress });
 
-      // Calculate the new progress sum
-      const isTopicCompleted = progress[selectedTopic] || false;
-      const progressIncrement = isTopicCompleted ? -1 : 1; // Subtract 1 if unchecking, add 1 if checking
-      const updatedProgressSum = currentProgress + progressIncrement;
-
-      // Update the progress in local state and Firestore
-      setProgress((prev) => ({
-        ...prev,
-        [selectedTopic]: !isTopicCompleted,
-      }));
-      await updateDoc(docRef, { cppProgress: updatedProgressSum });
-
-      console.log("Progress updated successfully:", updatedProgressSum);
+      console.log("Progress updated successfully:", updatedProgress);
     } catch (error) {
       console.error("Error updating progress in Firestore:", error);
     }
