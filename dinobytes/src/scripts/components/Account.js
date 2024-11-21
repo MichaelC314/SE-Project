@@ -4,7 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { getAuth, signOut } from "firebase/auth"; // Import Firebase Auth methods
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import '../../styles/Main.css';
-import profilePic from '../../img/pfp.jpg';
+import profilePic from '../../img/jake.jpg';
 
 function AccountTest({ onDeleteAccount, userId }) {
   const [showChangePassword, setShowChangePassword] = useState(false);
@@ -66,9 +66,13 @@ function AccountTest({ onDeleteAccount, userId }) {
       <Card className="account-card">
         <div className="text-center">
           <img
-            src={profilePic}
-            alt="Profile"
-            className="profile-img"
+             src={profilePic}
+             alt="Profile"
+             className="profile-img"
+             style={{
+               transform: "scale(1.25)", // Increase size by 1.25x
+               transition: "transform 0.3s ease-in-out", // Smooth transition
+             }}
           />
         </div>
 

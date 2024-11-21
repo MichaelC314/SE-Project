@@ -4,6 +4,7 @@ import "../../styles/Sidebar.css";
 import meteorGif from "../../img/meteor.gif";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { getDb } from "../services/db.mjs";
+import jake from '../../img/jake.jpg';
 
 const cppTopics = [
   "Introduction to C++",
@@ -24,7 +25,7 @@ function CppCourse({ userId }) {
       return;
     }
 
-    // Reset progress to avoid stale data yippeee
+    // Reset progress to avoid stale data
     setProgress({});
 
     // Load progress from Firestore
@@ -70,7 +71,11 @@ function CppCourse({ userId }) {
   };
 
   const completedCount = Object.values(progress).filter(Boolean).length;
-  const meteorSize = 100 + completedCount * 20;
+
+  // Adjust the meteor's horizontal position
+  const offset = 5; // Starts padding 5% from the left
+  const scale = 90; // Movement range is 60%
+  const progressPercentage = offset + (completedCount / cppTopics.length) * scale;
 
   const topicContent = {
     "Introduction to C++":
@@ -87,57 +92,92 @@ function CppCourse({ userId }) {
 
   return (
     <div className="d-flex" style={{ minHeight: "100vh", flexDirection: "column" }}>
+      {/* Sage Green Banner */}
+<div
+  style={{
+    backgroundColor: "#98A886", // Sage green color
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "60px", // Adjust the height as needed
+    zIndex: 1050,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "0 20px",
+  }}
+>
+  <img
+    src={require("../../img/jake.jpg")} // Adjust the path based on the image location
+    alt="Decorative Icon"
+    style={{
+      height: "50px", // Adjust height as needed
+      position: "absolute",
+      right: "20px", // Position it at the far-right
+      top: "5px", // Adjust vertical positioning
+    }}
+  />
+  <img
+    src={meteorGif}
+    alt="Meteor Progress Indicator"
+    style={{
+      position: "absolute",
+      left: `${progressPercentage}%`, // Horizontal position with offset and scale
+      transform: "translate(-50%, -50%) rotate(270deg)", // Rotate by 90 degrees
+      top: "50%",
+      width: "60px",
+      height: "60px", // Fixed height for the meteor
+      transition: "left 0.9s ease-in-out, transform 0.9s ease", // Smooth movement and rotation
+    }}
+  />
+</div>
+
+
+      {/* Sidebar and Course Content */}
       <Sidebar topics={cppTopics} onSelectTopic={setSelectedTopic} />
-      <div className="course-page" style={{ marginLeft: "250px", padding: "20px", flex: 1 }}>
+      <div className="course-page" style={{ marginLeft: "250px", padding: "20px", flex: 1, marginTop: "80px" }}>
         <h1>C++ Course</h1>
         <p>{topicContent[selectedTopic]}</p>
       </div>
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <img
-          src={meteorGif}
-          alt="Meteor Progress Indicator"
-          style={{
-            width: `${meteorSize}px`,
-            height: `${meteorSize}px`,
-            transition: "width 0.3s ease, height 0.3s ease",
-          }}
-        />
-      </div>
-      <div
-        style={{
-          position: "fixed",
-          bottom: 0,
-          width: "80%",
-          backgroundColor: "#f8f9fa",
-          padding: "10px 20px",
-          borderTop: "1px solid #ddd",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <label>
-          <input
-            type="checkbox"
-            checked={progress[selectedTopic] || false}
-            onChange={handleCheckboxChange}
-          />
-          Mark "{selectedTopic}" as Completed
-        </label>
-        <p>
-          <strong>Completed Lessons:</strong> {completedCount} / {cppTopics.length}
-        </p>
-      </div>
+
+      {/* Footer with Checkboxes */}
+<div
+  style={{
+    position: "fixed",
+    bottom: 0,
+    width: "100%", // Ensure it spans the full screen width
+    backgroundColor: "#f8f9fa",
+    padding: "15px 20px", // Adjust padding for consistent spacing
+    borderTop: "1px solid #ddd",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    boxSizing: "border-box", // Ensures padding is included in width
+  }}
+>
+  <label
+    style={{
+      flex: 1,
+      display: "flex",
+      alignItems: "center",
+      paddingLeft: "20px", // Add padding to move it away from the left edge
+    }}
+  >
+    <input
+      type="checkbox"
+      checked={progress[selectedTopic] || false}
+      onChange={handleCheckboxChange}
+      style={{ marginLeft: "200px" }} // Reasonable spacing between checkbox and text
+    />
+    Mark "{selectedTopic}" as Completed
+  </label>
+  <p style={{ flex: 1, textAlign: "center", margin: 0 }}>
+    <strong>Completed Lessons:</strong> {completedCount} / {cppTopics.length}
+  </p>
+  <div style={{ flex: 1, textAlign: "right" }}></div>
+</div>
+
     </div>
   );
 }
