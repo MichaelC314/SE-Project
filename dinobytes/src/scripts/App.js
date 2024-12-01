@@ -6,7 +6,7 @@ import Login from "./components/Login.js";
 import AccountInfoList from "./components/accountInfo-list.js";
 import LoginOverlay from "./components/LoginOverlay.js";
 import SignUp from "./components/SignUp";
-import CppCourse from "./components/CppCourse.js";
+import CppCourse from "../CppCourse/CppCourse.js";
 import AboutUs from "../AboutUs/AboutUs"; // Import About Us component
 import AccountTest from "../Account/AccountTest.js";
 import Account from "./components/Account";

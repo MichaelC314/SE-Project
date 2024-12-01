@@ -25,10 +25,15 @@
 .sidebar-link:hover {
   background-color: #e2e6ea !important; /* Hover color */
   color: #0056b3 !important; /* Darker color on hover */
+  cursor: url('../img/dinocursor.png'), pointer; /* Custom cursor when hovering over buttons */
 }
 
 .sidebar-link.active {
   background-color: #d4edda !important; /* Highlight color for active topic */
   border-color: #e4af69 !important; /* Border color for active topic */
   font-weight: bold !important;
+}
+
+.btn.btn-success:hover {
+  cursor: url('../img/dinocursor.png'), pointer !important; /* Custom cursor on hover with high priority */
 }
