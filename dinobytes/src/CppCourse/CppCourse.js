@@ -7,9 +7,10 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { getDb } from "../scripts/services/db.mjs";
 import jake from '../img/jake.jpg';
 
+
 const cppTopics = [
   "Introduction to C++",
-  "Variables and Data Types",
+  "Syntax",
   "Control Structures",
   "Functions and Scope",
   "Object-Oriented Programming",
@@ -73,12 +74,36 @@ function CppCourse({ userId }) {
   const offset = 5;
   const scale = 90;
   const progressPercentage = offset + (completedCount / cppTopics.length) * scale;
-
   const topicContent = {
     "Introduction to C++":
       "Welcome to the C++ Course! Start learning advanced concepts and build amazing projects.",
-    "Variables and Data Types":
-      "In this lesson, you'll learn about variables and data types in C++. Variables are containers for storing data values, and data types specify the type of data a variable can hold.",
+    "Syntax":
+      `Let's take a look at some example code to better understand C++:
+  
+      #include <iostream>
+      using namespace std;
+  
+      int main() {
+        cout << "Hello World!" << endl;
+        return 0;
+      }
+  
+      This is an example of what C++ code looks like. Let's break it down line by line to see what is really happening.
+  
+      In line #1, we see '#include <iostream>'. This is a header file library and it lets us use functionality from another file, in this example, we use 'cout' and 'endl'. This is useful because it means we do not have to completely start from scratch each time we program.
+  
+      In line #2, we see 'using namespace std;'. This lets use use the names from the standard library for objects from it. Without this line of code, if we wanted to use 'cout', we would have to write 'std::cout'.
+  
+      Line #3 is blank. C++ ignores this white space, so we can utilize this to help make our code more readable.
+  
+      Line #4 has 'int main()'. This is known as a function. All of the code inside of the curly brackets will be executed. In C++, our primary function is known as the main function, hence the name.
+  
+      Line #5 has our cout statement, which is an object in C++ that can be utilized with the insertion operator (<<) to either print or output text. For the example above, it prints "Hello World!". The object after that bit of text is 'endl'. This will print out a new line. All of this is finished with a semicolon. A semicolon is used to mark the end of a statement. This must be done for every statement in C++.
+  
+      Line #6 has 'return 0;'. This ends the main function.
+  
+      Line #7 is our final line, and it closes the curly brackets for the main function.`
+    ,
     "Control Structures":
       "Control structures in C++ allow you to control the flow of your program. This includes conditional statements like if-else and loops like for and while.",
     "Functions and Scope":
@@ -86,6 +111,11 @@ function CppCourse({ userId }) {
     "Object-Oriented Programming":
       "C++ supports object-oriented programming, which helps you create reusable code using classes and objects.",
   };
+
+  // Split content into sentences and return as an array
+  const contentSentences = topicContent[selectedTopic]
+    .split(". ")
+    .map((sentence, index) => <p key={index}>{sentence.trim()}.</p>);
 
   return (
     <div className="d-flex" style={{ minHeight: "100vh", flexDirection: "column" }}>
@@ -108,7 +138,8 @@ function CppCourse({ userId }) {
       <Sidebar topics={cppTopics} onSelectTopic={setSelectedTopic} />
       <div className="course-page">
         <h1>C++ Course</h1>
-        <p>{topicContent[selectedTopic]}</p>
+        {/* Render content sentences */}
+        {contentSentences}
       </div>
 
       {/* Footer with Checkboxes */}

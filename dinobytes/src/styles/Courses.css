@@ -74,3 +74,15 @@
     text-align: right;
   }
   
+  /* Course text */
+.course-page p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 16px;
+  color: #333;
+  margin-left: 5%;
+}
+
+.course-page h1 {
+  margin-left: 5%;
+}

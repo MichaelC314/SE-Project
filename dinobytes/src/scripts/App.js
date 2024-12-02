@@ -59,7 +59,7 @@ function App() {
           style={{
             backgroundColor: "#98A886", // Sage green color
             color: "white",
-            padding: "10px 20px",
+           
             textAlign: "center",
             fontWeight: "bold",
             fontSize: "1.2rem",
