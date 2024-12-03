@@ -77,7 +77,6 @@ function App() {
             <Navbar.Brand as={Link} to="/">Dinobytes</Navbar.Brand>
             <Nav className="navbar-nav">
               <Nav.Link as={Link} to="/">Home</Nav.Link>
-              <Nav.Link as={Link} to="/lessons">Lessons</Nav.Link>
               {isLoggedIn ? (
                 <Nav.Link as={Link} to="/account">Account</Nav.Link>
               ) : (
