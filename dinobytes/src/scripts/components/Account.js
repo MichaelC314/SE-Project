@@ -6,7 +6,7 @@ import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import '../../styles/Main.css';
 import profilePic from '../../img/jake.jpg';
 import ImageCarousel from './ImageCarousel'; // Import the carousel component
-import images from './images'; // Import the array of image paths
+import images from './imagesMap'; // Import the array of image paths
 import ChangeProfileModal from './ChangeProfileModal';
 
 function AccountTest({ onDeleteAccount, userId }) {
