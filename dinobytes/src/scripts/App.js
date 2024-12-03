@@ -6,7 +6,10 @@ import Login from "./components/Login.js";
 import AccountInfoList from "./components/accountInfo-list.js";
 import LoginOverlay from "./components/LoginOverlay.js";
 import SignUp from "./components/SignUp";
-import CppCourse from "../CppCourse/CppCourse.js";
+
+import CppCourse from "../CppCourse/CppCourse.js";//imported cpp course
+import PythonCourse from "../PythonCourse/PythonCourse.js";//imported python course
+
 import AboutUs from "../AboutUs/AboutUs"; // Import About Us component
 import AccountTest from "../Account/AccountTest.js";
 import Account from "./components/Account";
@@ -162,7 +165,7 @@ function App() {
             }
           />
           <Route path="/cpp-course" element={<CppCourse userId={userId} />} />
-          <Route path="/python-course" element={<CppCourse userId={userId} />} />
+          <Route path="/python-course" element={<PythonCourse userId={userId} />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/account" element={<Account onLogout={handleLogout} userId={userId} />} />
           <Route path="/about-us" element={<AboutUs />} />
