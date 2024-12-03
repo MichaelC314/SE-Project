@@ -1,45 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import { getDb } from '../services/db.mjs';
-import { doc, getDoc } from "firebase/firestore";
-import { getAuth, signOut } from "firebase/auth"; // Import Firebase Auth methods
-import { Card, Button, Container, Row, Col } from 'react-bootstrap';
-import '../../styles/Main.css';
-import profilePic from '../../img/jake.jpg';
+import React, { useState, useEffect } from "react";
+import { getDb } from "../services/db.mjs";
+import { doc, getDoc, updateDoc  } from "firebase/firestore";
+import { getAuth, signOut } from "firebase/auth";
+import { Card, Button, Container, Row, Col } from "react-bootstrap";
+import "../../styles/Main.css";
+import defaultProfilePic from "../../img/question.jpeg"; // Default fallback profile picture
+import imagesMap from "./imagesMap"; // Import the map of images
+import ChangeProfileModal from "./ChangeProfileModal";
 
-function AccountTest({ onDeleteAccount, userId }) {
+function Account({ onDeleteAccount, userId }) {
   const [showChangePassword, setShowChangePassword] = useState(false);
-  const [newPassword, setNewPassword] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [username, setUsername] = useState('');
+  const [newPassword, setNewPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [username, setUsername] = useState("");
+  const [showChangeProfile, setShowChangeProfile] = useState(false);
+
+  // Initialize newProfile with the first key in imagesMap
+  const [newProfile, setNewProfile] = useState(
+    Array.from(imagesMap.keys())[0] || "" // Default to the first key in the map or empty string
+  );
 
   const db = getDb();
-  const auth = getAuth(); // Initialize Firebase Auth
+  const auth = getAuth();
 
   useEffect(() => {
-    // Fetch username from Firestore based on userId
-    const fetchUsername = async () => {
+    const fetchUserData = async () => {
       if (userId) {
         try {
           const userDoc = await getDoc(doc(db, "accountInfo", userId));
           if (userDoc.exists()) {
-            setUsername(userDoc.data().userId); // Set the username from Firestore
+            const userData = userDoc.data();
+            setUsername(userData.username);
+            setNewProfile(userData.profilePic || Array.from(imagesMap.keys())[0]); // Use Firestore value or default
           } else {
             console.error("No such user document!");
           }
         } catch (error) {
-          console.error("Error fetching username:", error);
+          console.error("Error fetching user data:", error);
         }
       }
     };
-    fetchUsername();
+    fetchUserData();
   }, [userId, db]);
 
   const handleLogout = async () => {
     try {
-      await signOut(auth); // Sign the user out
+      await signOut(auth);
       console.log("User logged out successfully.");
-      // redirect to le home
-      window.location.href = "/"; 
+      window.location.href = "/";
     } catch (error) {
       console.error("Error logging out:", error);
     }
@@ -52,27 +60,51 @@ function AccountTest({ onDeleteAccount, userId }) {
 
   const handlePasswordChange = async () => {
     if (!validatePassword(newPassword)) {
-      setPasswordError("Password must be at least 8 characters long, contain one uppercase letter, and one special character.");
+      setPasswordError(
+        "Password must be at least 8 characters long, contain one uppercase letter, and one special character."
+      );
       return;
     }
     alert("Password updated successfully!");
     setShowChangePassword(false);
-    setNewPassword('');
-    setPasswordError('');
+    setNewPassword("");
+    setPasswordError("");
   };
+
+  const handleProfileChange = async (imageKey) => {
+    try {
+      // Update the Firestore document
+      const accountDocRef = doc(db, "accountInfo", userId);
+      await updateDoc(accountDocRef, {
+        profilePic: imageKey, // Save the key (e.g., "FlyDino1")
+      });
+  
+      setNewProfile(imageKey); // Update local state
+      setShowChangeProfile(false); // Close the modal
+      alert("Profile picture updated successfully!");
+    } catch (error) {
+      console.error("Error updating profile picture:", error);
+      alert("Failed to update profile picture. Please try again.");
+    }
+  };
+
+  // Get the current profile picture path
+  const profilePic = newProfile
+    ? imagesMap.get(newProfile) // Use the selected profile picture
+    : defaultProfilePic; // Fallback if no key is selected
 
   return (
     <Container className="account-page">
       <Card className="account-card">
         <div className="text-center">
           <img
-             src={profilePic}
-             alt="Profile"
-             className="profile-img"
-             style={{
-               transform: "scale(1.25)", // Increase size by 1.25x
-               transition: "transform 0.3s ease-in-out", // Smooth transition
-             }}
+            src={profilePic}
+            alt="Profile"
+            className="profile-img"
+            style={{
+              transform: "scale(1.25)", // Increase size by 1.25x
+              transition: "transform 0.3s ease-in-out", // Smooth transition
+            }}
           />
         </div>
 
@@ -101,7 +133,7 @@ function AccountTest({ onDeleteAccount, userId }) {
           </Row>
           <Row>
             <Col>
-              <Button className="account-button">
+              <Button className="account-button" onClick={() => setShowChangeProfile(true)}>
                 Change Profile Picture
               </Button>
             </Col>
@@ -121,15 +153,24 @@ function AccountTest({ onDeleteAccount, userId }) {
               className="input"
             />
             {passwordError && <p className="error">{passwordError}</p>}
-            <button className="button-primary" onClick={handlePasswordChange}>Submit</button>
+            <button className="button-primary" onClick={handlePasswordChange}>
+              Submit
+            </button>
             <button className="button-secondary" onClick={() => setShowChangePassword(false)}>
               Cancel
             </button>
           </div>
         </div>
       )}
+
+      {showChangeProfile && (
+        <ChangeProfileModal
+          handleProfileChange={handleProfileChange}
+          setShowChangeProfile={setShowChangeProfile}
+        />
+      )}
     </Container>
   );
 }
 
-export default AccountTest;
+export default Account;

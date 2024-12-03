@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ImageCarousel from './ImageCarousel'; // Import the carousel component
-import images from './images'; // Import the array of image paths
+import images from './imagesMap'; // Import the array of image paths
 
 const ChangeProfileModal = ({ handleProfileChange, setShowChangeProfile }) => {
   const [selectedImage, setSelectedImage] = useState(images[0]); // Default to the first image
@@ -13,10 +13,7 @@ const ChangeProfileModal = ({ handleProfileChange, setShowChangeProfile }) => {
     <div className="modal-overlay">
       <div className="modal-content">
         <h2>Change Profile Picture</h2>
-        <ImageCarousel
-          images={images}
-          onSelect={handleSelect} // Pass handler to track selected image
-        />
+        <ImageCarousel images={images} onSelect={handleSelect} />
         <button
           className="button-primary"
           onClick={() => handleProfileChange(selectedImage)}
@@ -33,5 +30,6 @@ const ChangeProfileModal = ({ handleProfileChange, setShowChangeProfile }) => {
     </div>
   );
 };
+
 
 export default ChangeProfileModal;

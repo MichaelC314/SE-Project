@@ -8,7 +8,6 @@ import LoginOverlay from "./components/LoginOverlay.js";
 import SignUp from "./components/SignUp";
 import CppCourse from "../CppCourse/CppCourse.js";
 import AboutUs from "../AboutUs/AboutUs"; // Import About Us component
-import AccountTest from "../Account/AccountTest.js";
 import Account from "./components/Account";
 
 import cplusplusLogo from "../img/cpp_logo.png";
@@ -167,8 +166,8 @@ function App() {
           <Route path="/account" element={<Account onLogout={handleLogout} userId={userId} />} />
           <Route path="/about-us" element={<AboutUs />} />
 
-          {/* Temporary route for AccountTest */}
-          {skipLoginForStyling && <Route path="/account-test" element={<AccountTest />} />}
+          {/* Temporary route for AccountTest
+          {skipLoginForStyling && <Route path="/account-test" element={<AccountTest />} />} */}
         </Routes>
       </div>
 
