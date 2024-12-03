@@ -1,13 +1,194 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Sage Green Banner */
+.course-banner {
+  background-color: #98a886;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.course-banner img.decorative-icon {
+  height: 50px;
+  position: absolute;
+  right: 20px;
+  top: 5px;
+  border-radius: 20%;
+}
+
+.course-banner img.meteor-progress {
+  position: absolute;
+  transform: translate(-50%, -50%) rotate(270deg);
+  top: 50%;
+  width: 60px;
+  height: 60px;
+  transition: left 0.9s ease-in-out, transform 0.9s ease;
+}
+
+/* Main Content */
+.course-page {
+  margin-left: 250px;
+  padding: 20px;
+  flex: 1;
+  margin-top: 80px;
+}
+
+/* Footer */
+.course-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 15px 20px;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.course-footer label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.course-footer input {
+  margin-left: 200px;
+}
+
+.course-footer p {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+}
+
+.course-footer .right-section {
+  flex: 1;
+  text-align: right;
+}
+
+/* Target the entire CodeMirror editor */
+.CodeMirror {
+background-color: #4caf50 !important; /* Green background */
+color: white !important; /* Text color to make it readable */
+font-family: 'Courier New', Courier, monospace; /* Optional: set the font */
+}
+
+/* Target the code text within the editor */
+.CodeMirror-line {
+background-color: #4caf50 !important; /* Ensure lines also have green background */
+color: white !important; /* Text color */
+}
+
+/* Optional: Highlight the cursor and selections for contrast */
+.CodeMirror-cursor {
+border-left: 2px solid white; /* White cursor */
+}
+
+/* Optional: Highlighting for active lines */
+.CodeMirror-activeline-background {
+background-color: #388e3c; /* Slightly darker green for active line */
+}
+
+.CodeMirror {
+width: 100%; /* Stretch to fit container */
+resize: none; /* Prevent manual resizing */
+overflow: hidden; /* Avoid unnecessary scrollbars */
+min-height: 200px; /* Ensure a base height */
+transition: height 0.2s ease; /* Smooth resizing */
+}
+
+.course-banner {
+background-color: #98a886;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 60px;
+z-index: 1050;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 20px;
+}
+
+.course-banner img.decorative-icon {
+height: 50px;
+position: absolute;
+right: 20px;
+top: 5px;
+border-radius: 20%;
+}
+
+.course-banner img.meteor-progress {
+position: absolute;
+transform: translate(-50%, -50%) rotate(270deg);
+top: 50%;
+width: 60px;
+height: 60px;
+transition: left 0.9s ease-in-out, transform 0.9s ease;
+}
+
+
+.course-page {
+margin-left: 250px;
+padding: 20px;
+flex: 1;
+margin-top: 0px;
+margin-bottom: 15%;
+}
+
+
+.course-footer {
+position: fixed;
+bottom: 0;
+width: 100%;
+background-color: #f8f9fa;
+padding: 15px 20px;
+border-top: 1px solid #ddd;
+display: flex;
+justify-content: space-between;
+align-items: center;
+box-sizing: border-box;
+margin-left: 15%;
+
+}
+
+.course-footer label {
+flex: 1;
+display: flex;
+align-items: center;
+padding-left: 20px;
+}
+
+.course-footer input {
+margin-left: 200px;
+}
+
+.course-footer p {
+flex: 1;
+text-align: center;
+margin: 0;
+}
+
+.course-footer .right-section {
+flex: 1;
+text-align: right;
+}
+
+
+
+.course-page h1 {
+margin-left: 5%;
+}
+
+.course-page div {
+margin-left: 5%;
 }
