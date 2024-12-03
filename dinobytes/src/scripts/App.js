@@ -10,6 +10,7 @@ import CppCourse from "../CppCourse/CppCourse.js";
 import AboutUs from "../AboutUs/AboutUs"; // Import About Us component
 import AccountTest from "../Account/AccountTest.js";
 import Account from "./components/Account";
+import PythonCourse from "../PythonCourse/PythonCourse.js"; // Import PythonCourse component
 
 import cplusplusLogo from "../img/cpp_logo.png";
 import pythonLogo from "../img/python_logo.png";
@@ -59,7 +60,6 @@ function App() {
           style={{
             backgroundColor: "#98A886", // Sage green color
             color: "white",
-           
             textAlign: "center",
             fontWeight: "bold",
             fontSize: "1.2rem",
@@ -68,9 +68,7 @@ function App() {
             width: "100%",
             zIndex: 1050, // Same z-index as the navbar
           }}
-        >
-          
-        </div>
+        ></div>
       ) : (
         <Navbar bg="dark" className="fixed-top">
           <Container fluid>
@@ -141,7 +139,9 @@ function App() {
                       <Card.Body>
                         <Card.Title>Python Course</Card.Title>
                         <Card.Text>Python is a versatile, high-level programming language.</Card.Text>
-                        <Button variant="primary">Go to Course</Button>
+                        <Button variant="primary" onClick={() => navigate("/python-course")}>
+                          Go to Course
+                        </Button>
                       </Card.Body>
                     </Card>
                   </Col>
@@ -160,6 +160,7 @@ function App() {
             }
           />
           <Route path="/cpp-course" element={<CppCourse userId={userId} />} />
+          <Route path="/python-course" element={<PythonCourse userId={userId} />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/account" element={<Account onLogout={handleLogout} userId={userId} />} />
           <Route path="/about-us" element={<AboutUs />} />
