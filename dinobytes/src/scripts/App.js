@@ -77,7 +77,6 @@ function App() {
             <Navbar.Brand as={Link} to="/">Dinobytes</Navbar.Brand>
             <Nav className="navbar-nav">
               <Nav.Link as={Link} to="/">Home</Nav.Link>
-              <Nav.Link as={Link} to="/lessons">Lessons</Nav.Link>
               {isLoggedIn ? (
                 <Nav.Link as={Link} to="/account">Account</Nav.Link>
               ) : (
@@ -142,7 +141,7 @@ function App() {
                       <Card.Body>
                         <Card.Title>Python Course</Card.Title>
                         <Card.Text>Python is a versatile, high-level programming language.</Card.Text>
-                        <Button variant="primary" onClick={() => navigate("/Python")}>
+                        <Button variant="primary" onClick={() => navigate("/python-course")}>
                           Go to Course
                         </Button>
                       </Card.Body>
@@ -163,6 +162,7 @@ function App() {
             }
           />
           <Route path="/cpp-course" element={<CppCourse userId={userId} />} />
+          <Route path="/python-course" element={<CppCourse userId={userId} />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/account" element={<Account onLogout={handleLogout} userId={userId} />} />
           <Route path="/about-us" element={<AboutUs />} />
