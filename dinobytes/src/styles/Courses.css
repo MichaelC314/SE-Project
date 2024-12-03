@@ -86,3 +86,11 @@
 .course-page div {
   margin-left: 5%;
 }
+
+div.cm-editor {
+  margin-left: -10%; 
+  text-align: left; 
+  width: auto; 
+}
+
+
