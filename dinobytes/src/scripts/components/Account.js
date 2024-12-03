@@ -31,7 +31,7 @@ function Account({ onDeleteAccount, userId }) {
           if (userDoc.exists()) {
             //const userData = userDoc.data();
             setUsername(userDoc.data().userId);
-            setNewProfile(userDoc.profilePic || Array.from(imagesMap.keys())[0]); // Use Firestore value or default
+            setNewProfile(userDoc.data().profilePic || Array.from(imagesMap.keys())[0]); // Use Firestore value or default
           } else {
             console.error("No such user document!");
           }
