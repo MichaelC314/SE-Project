@@ -6,7 +6,10 @@ import Login from "./components/Login.js";
 import AccountInfoList from "./components/accountInfo-list.js";
 import LoginOverlay from "./components/LoginOverlay.js";
 import SignUp from "./components/SignUp";
-import CppCourse from "../CppCourse/CppCourse.js";
+
+import CppCourse from "../CppCourse/CppCourse.js";//imported cpp course
+import PythonCourse from "../PythonCourse/PythonCourse.js";//imported python course
+
 import AboutUs from "../AboutUs/AboutUs"; // Import About Us component
 import Account from "./components/Account";
 
@@ -53,7 +56,7 @@ function App() {
   return (
     <div className="Home">
       {/* Conditional rendering for the navbar or the sage green banner */}
-      {location.pathname === "/cpp-course" ? (
+      {(location.pathname === "/cpp-course" || location.pathname === "/python-course") ? (
         <div
           style={{
             backgroundColor: "#98A886", // Sage green color
@@ -76,7 +79,6 @@ function App() {
             <Navbar.Brand as={Link} to="/">Dinobytes</Navbar.Brand>
             <Nav className="navbar-nav">
               <Nav.Link as={Link} to="/">Home</Nav.Link>
-              <Nav.Link as={Link} to="/lessons">Lessons</Nav.Link>
               {isLoggedIn ? (
                 <Nav.Link as={Link} to="/account">Account</Nav.Link>
               ) : (
@@ -141,7 +143,7 @@ function App() {
                       <Card.Body>
                         <Card.Title>Python Course</Card.Title>
                         <Card.Text>Python is a versatile, high-level programming language.</Card.Text>
-                        <Button variant="primary" onClick={() => navigate("/Python")}>
+                        <Button variant="primary" onClick={() => navigate("/python-course")}>
                           Go to Course
                         </Button>
                       </Card.Body>
@@ -162,6 +164,7 @@ function App() {
             }
           />
           <Route path="/cpp-course" element={<CppCourse userId={userId} />} />
+          <Route path="/python-course" element={<PythonCourse userId={userId} />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/account" element={<Account onLogout={handleLogout} userId={userId} />} />
           <Route path="/about-us" element={<AboutUs />} />
@@ -172,7 +175,7 @@ function App() {
       </div>
 
       {/* Home Button on Bottom Left */}
-      {location.pathname === "/cpp-course" && (
+      {(location.pathname === "/cpp-course" || location.pathname === "/python-course") && (
         <Button
           variant="success"
           style={{

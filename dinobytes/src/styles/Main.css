@@ -35,7 +35,7 @@ body {
   display: flex;
   justify-content: center; /* Ensures the nav items are centered */
   width: 100%; /* Takes full width to center content */
-  margin-left: -120px;
+  margin-left: -50%;
 }
 
 .navbar-brand {
