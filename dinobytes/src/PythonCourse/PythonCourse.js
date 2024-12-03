@@ -12,23 +12,20 @@ import { basicSetup } from "codemirror";
 import { python } from "@codemirror/lang-python";
 
 const pythonTopics = [
-  "Introduction to Python",
-  "Python Output",
   "Variables",
   "Control Structures",
 ];
 
 const lessonContent = {
-    "Variables": {
-      text: `In Python, variables are used to store data values. Python has no command for declaring a variable; the assignment operator \`=\`, is used for creating variables. Python also has dynamic typing, meaning you do not need to specify the type of variable when you create it.\n\nSome basic types in Python are:\n- int: stores integers, like 100\n- float: stores decimal numbers, like 100.5\n- str: stores strings (text), like 'Hello'\n- bool: stores Boolean values, True or False`,
-      code: `my_int = 5  # Integer\nmy_float = 7.2  # Floating point number\nmy_string = 'Hello'  # String\nmy_bool = True  # Boolean\n\nprint(my_int)\nprint(my_float)\nprint(my_string)\nprint(my_bool)`,
-    },
-    "Control Structures": {
-      text: `In Python, control structures allow you to control the flow of your program. Some common control structures include:\n- if/else statements\n- loops (for, while)`,
-      code: `x = 10\nif x > 5:\n    print("x is greater than 5")\nelse:\n    print("x is less than or equal to 5")`,
-    }
-  };
-  
+  "Variables": {
+    text: `In Python, variables are used to store data values. Python has no command for declaring a variable; the assignment operator \`=\`, is used for creating variables. Python also has dynamic typing, meaning you do not need to specify the type of variable when you create it.\n\nSome basic types in Python are:\n- int: stores integers, like 100\n- float: stores decimal numbers, like 100.5\n- str: stores strings (text), like 'Hello'\n- bool: stores Boolean values, True or False`,
+    code: `my_int = 5  # Integer\nmy_float = 7.2  # Floating point number\nmy_string = 'Hello'  # String\nmy_bool = True  # Boolean\n\nprint(my_int)\nprint(my_float)\nprint(my_string)\nprint(my_bool)`,
+  },
+  "Control Structures": {
+    text: `In Python, control structures allow you to control the flow of your program. Some common control structures include:\n- if/else statements\n- loops (for, while)`,
+    code: `x = 10\nif x > 5:\n    print("x is greater than 5")\nelse:\n    print("x is less than or equal to 5")`,
+  }
+};
 
 function PythonCourse({ userId }) {
   const [selectedTopic, setSelectedTopic] = useState("Introduction to Python");
@@ -64,23 +61,28 @@ function PythonCourse({ userId }) {
   }, [userId, db]);
 
   useEffect(() => {
-    if (codeMirrorRef.current) {
-      const editor = new EditorView({
-        state: EditorState.create({
-          doc: lessonContent[selectedTopic].code,
-          extensions: [basicSetup, python(), EditorView.editable.of(false)], // Disable editing
-        }),
-        parent: codeMirrorRef.current,
-      });
+    const topicContent = lessonContent[selectedTopic];
+    if (topicContent) {
+      if (codeMirrorRef.current) {
+        const editor = new EditorView({
+          state: EditorState.create({
+            doc: topicContent.code,
+            extensions: [basicSetup, python(), EditorView.editable.of(false)], // Disable editing
+          }),
+          parent: codeMirrorRef.current,
+        });
 
-      return () => {
-        editor.destroy(); // Clean up editor instance when component unmounts
-      };
+        return () => {
+          editor.destroy(); // Clean up editor instance when component unmounts
+        };
+      }
+    } else {
+      console.error(`No content found for the selected topic: ${selectedTopic}`);
     }
   }, [selectedTopic]);
 
   useEffect(() => {
-    if (codeMirrorRefMultiple.current) {
+    if (codeMirrorRefMultiple.current && lessonContent["Python Output"]?.additionalCode) {
       lessonContent["Python Output"].additionalCode.forEach((code, index) => {
         const editor = new EditorView({
           state: EditorState.create({
@@ -120,7 +122,6 @@ function PythonCourse({ userId }) {
   };
 
   const completedCount = Object.values(progress).filter(Boolean).length;
-
   const offset = 5;
   const scale = 90;
   const progressPercentage = offset + (completedCount / pythonTopics.length) * scale;
@@ -142,22 +143,29 @@ function PythonCourse({ userId }) {
       <Sidebar topics={pythonTopics} onSelectTopic={setSelectedTopic} />
       <div className="course-page">
         <h1>Python Course</h1>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: lessonContent[selectedTopic].text,
-          }}
-        />
-        <div ref={codeMirrorRef} style={{ height: "300px", marginTop: "20px" }} />
-        {selectedTopic === "Python Output" && (
+        {/* Check if the topic content exists before rendering */}
+        {lessonContent[selectedTopic] ? (
           <>
-            {lessonContent["Python Output"].additionalCode.map((code, index) => (
-              <div
-                key={index}
-                ref={(el) => (codeMirrorRefMultiple.current[index] = el)}
-                style={{ height: "200px", marginTop: "20px" }}
-              />
-            ))}
+            <div
+              dangerouslySetInnerHTML={{
+                __html: lessonContent[selectedTopic].text,
+              }}
+            />
+            <div ref={codeMirrorRef} style={{ height: "300px", marginTop: "20px" }} />
+            {selectedTopic === "Python Output" && lessonContent["Python Output"]?.additionalCode && (
+              <>
+                {lessonContent["Python Output"].additionalCode.map((code, index) => (
+                  <div
+                    key={index}
+                    ref={(el) => (codeMirrorRefMultiple.current[index] = el)}
+                    style={{ height: "200px", marginTop: "20px" }}
+                  />
+                ))}
+              </>
+            )}
           </>
+        ) : (
+          <p>No content available for this topic.</p>
         )}
       </div>
 

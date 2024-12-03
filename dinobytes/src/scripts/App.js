@@ -57,7 +57,7 @@ function App() {
   return (
     <div className="Home">
       {/* Conditional rendering for the navbar or the sage green banner */}
-      {location.pathname === "/cpp-course" ? (
+      {(location.pathname === "/cpp-course" || location.pathname === "/python-course") ? (
         <div
           style={{
             backgroundColor: "#98A886", // Sage green color
@@ -176,7 +176,7 @@ function App() {
       </div>
 
       {/* Home Button on Bottom Left */}
-      {location.pathname === "/cpp-course" && (
+      {(location.pathname === "/cpp-course" || location.pathname === "/python-course") && (
         <Button
           variant="success"
           style={{
