@@ -112,7 +112,7 @@ function AccountTest({ onDeleteAccount, userId }) {
           </Row>
           <Row>
             <Col>
-              <Button className="account-button">
+              <Button className="account-button" onClick={() => setShowChangeProfile(true)}>
                 Change Profile Picture
               </Button>
             </Col>
