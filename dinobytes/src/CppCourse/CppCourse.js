@@ -159,7 +159,7 @@ const lessonContent = {
 
 
 function CppCourse({ userId }) {
-  const [selectedTopic, setSelectedTopic] = useState("C++ Output");
+  const [selectedTopic, setSelectedTopic] = useState("Introduction to C++");
   const [progress, setProgress] = useState({});
   const db = getDb();
 

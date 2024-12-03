@@ -28,7 +28,7 @@ const lessonContent = {
 };
 
 function PythonCourse({ userId }) {
-  const [selectedTopic, setSelectedTopic] = useState("Introduction to Python");
+  const [selectedTopic, setSelectedTopic] = useState("Variables");
   const [progress, setProgress] = useState({});
   const db = getDb();
   const codeMirrorRef = useRef([]);
@@ -142,7 +142,7 @@ function PythonCourse({ userId }) {
       {/* Sidebar and Course Content */}
       <Sidebar topics={pythonTopics} onSelectTopic={setSelectedTopic} />
       <div className="course-page">
-        <h1>Python Course</h1>
+        <h1>{selectedTopic}</h1>
         {/* Check if the topic content exists before rendering */}
         {lessonContent[selectedTopic] ? (
           <>
