@@ -13,27 +13,34 @@
 .sidebar-link {
   display: block;
   padding: 12px !important; /* Enforce padding */
-  background-color: #82e8f0 !important; /* Default background color */
-  border: 1px solid #82B7DC !important; /* Red border to ensure visibility */
+  background-color: #98a886 !important; /* Default background color */
+  border: 1px solid #748e58 !important; /* Red border to ensure visibility */
   margin-bottom: 5px !important; /* Space between each box */
-  color: #007bff !important; /* Link color */
+  color: #ffffff !important; /* Link color */
   border-radius: 4px !important;
   text-decoration: none !important;
   transition: background-color 0.3s, color 0.3s !important; /* Smooth transition for hover effect */
 }
 
 .sidebar-link:hover {
-  background-color: #e2e6ea !important; /* Hover color */
-  color: #0056b3 !important; /* Darker color on hover */
+  background-color: #4e6734 !important; /* Hover color */
+  color: #e4af69 !important; /* Darker color on hover */
+  border-color: #e4af69 !important;
   cursor: url('../img/dinocursor.png'), pointer; /* Custom cursor when hovering over buttons */
 }
 
 .sidebar-link.active {
-  background-color: #d4edda !important; /* Highlight color for active topic */
+  background-color: #4e6734 !important; /* Highlight color for active topic */
   border-color: #e4af69 !important; /* Border color for active topic */
-  font-weight: bold !important;
+  font-weight: bold !important; 
 }
 
 .btn.btn-success:hover {
   cursor: url('../img/dinocursor.png'), pointer !important; /* Custom cursor on hover with high priority */
+  background-color: #4e6734 !important;
+}
+
+.btn.btn-success {
+  background-color: #98a886;
+  border-color: #748e58;
 }
