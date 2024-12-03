@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import '../styles/Main.css';
 import profilePic from '../img/pfp.jpg';
+import ImageCarousel from './ImageCarousel'; // Import the carousel component
+import images from './images'; // Import the array of image paths
+import ChangeProfileModal from './ChangeProfileModal';
 
 function AccountTest({ onLogout, onDeleteAccount, userId }) {
   const [showChangePassword, setShowChangePassword] = useState(false);
+  const [showChangeProfile, setShowChangeProfile] = useState(false);
   const [newPassword, setNewPassword] = useState('');
+  const [newProfile, setNewProfile] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
   const validatePassword = (password) => {
@@ -22,6 +27,12 @@ function AccountTest({ onLogout, onDeleteAccount, userId }) {
     setShowChangePassword(false);
     setNewPassword('');
     setPasswordError('');
+  };
+
+  const handleProfileChange = async () => {
+    alert("Profile updated successfully!");
+    setShowChangeProfile(false);
+    setNewProfile('');
   };
 
   return (
@@ -60,7 +71,7 @@ function AccountTest({ onLogout, onDeleteAccount, userId }) {
           </Row>
           <Row>
             <Col>
-              <Button className="account-button">
+              <Button className="account-button" onClick={() => setShowChangeProfile(true)}>
                 Change Profile Picture
               </Button>
             </Col>
@@ -86,6 +97,16 @@ function AccountTest({ onLogout, onDeleteAccount, userId }) {
             </button>
           </div>
         </div>
+      )}
+
+      {showChangeProfile && (
+        <ChangeProfileModal
+          handleProfileChange={(image) => {
+            setNewProfile(image); // Save the image URL here
+            setShowChangeProfile(false);
+          }}
+          setShowChangeProfile={setShowChangeProfile}
+        />
       )}
     </Container>
   );
