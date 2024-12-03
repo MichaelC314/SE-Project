@@ -35,7 +35,8 @@
     margin-left: 250px;
     padding: 20px;
     flex: 1;
-    margin-top: 80px;
+    margin-top: 0px;
+    margin-bottom: 15%;
   }
   
   /* Footer */
@@ -50,6 +51,8 @@
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
+    margin-left: 15%;
+
   }
   
   .course-footer label {
@@ -74,3 +77,12 @@
     text-align: right;
   }
   
+  /* Course text */
+
+.course-page h1 {
+  margin-left: 5%;
+}
+
+.course-page div {
+  margin-left: 5%;
+}

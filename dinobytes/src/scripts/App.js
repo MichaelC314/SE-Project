@@ -142,7 +142,9 @@ function App() {
                       <Card.Body>
                         <Card.Title>Python Course</Card.Title>
                         <Card.Text>Python is a versatile, high-level programming language.</Card.Text>
-                        <Button variant="primary">Go to Course</Button>
+                        <Button variant="primary" onClick={() => navigate("/Python")}>
+                          Go to Course
+                        </Button>
                       </Card.Body>
                     </Card>
                   </Col>
