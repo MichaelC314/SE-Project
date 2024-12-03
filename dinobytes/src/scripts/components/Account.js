@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getDb } from "../services/db.mjs";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc  } from "firebase/firestore";
 import { getAuth, signOut } from "firebase/auth";
 import { Card, Button, Container, Row, Col } from "react-bootstrap";
 import "../../styles/Main.css";
@@ -24,21 +24,23 @@ function Account({ onDeleteAccount, userId }) {
   const auth = getAuth();
 
   useEffect(() => {
-    const fetchUsername = async () => {
+    const fetchUserData = async () => {
       if (userId) {
         try {
           const userDoc = await getDoc(doc(db, "accountInfo", userId));
           if (userDoc.exists()) {
-            setUsername(userDoc.data().userId);
+            const userData = userDoc.data();
+            setUsername(userData.username);
+            setNewProfile(userData.profilePic || Array.from(imagesMap.keys())[0]); // Use Firestore value or default
           } else {
             console.error("No such user document!");
           }
         } catch (error) {
-          console.error("Error fetching username:", error);
+          console.error("Error fetching user data:", error);
         }
       }
     };
-    fetchUsername();
+    fetchUserData();
   }, [userId, db]);
 
   const handleLogout = async () => {
@@ -69,10 +71,21 @@ function Account({ onDeleteAccount, userId }) {
     setPasswordError("");
   };
 
-  const handleProfileChange = (imageKey) => {
-    setNewProfile(imageKey); // Update the selected profile picture key
-    setShowChangeProfile(false);
-    alert("Profile picture updated successfully!");
+  const handleProfileChange = async (imageKey) => {
+    try {
+      // Update the Firestore document
+      const accountDocRef = doc(db, "accountInfo", userId);
+      await updateDoc(accountDocRef, {
+        profilePic: imageKey, // Save the key (e.g., "FlyDino1")
+      });
+  
+      setNewProfile(imageKey); // Update local state
+      setShowChangeProfile(false); // Close the modal
+      alert("Profile picture updated successfully!");
+    } catch (error) {
+      console.error("Error updating profile picture:", error);
+      alert("Failed to update profile picture. Please try again.");
+    }
   };
 
   // Get the current profile picture path
