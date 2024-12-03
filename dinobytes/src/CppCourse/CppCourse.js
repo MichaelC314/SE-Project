@@ -10,6 +10,7 @@ import { EditorView } from "codemirror";
 import { EditorState } from "@codemirror/state";
 import { basicSetup } from "codemirror";
 import { cpp } from "@codemirror/lang-cpp";
+import imagesMap from "../scripts/components/imagesMap"
 
 const cppTopics = [
   "Introduction to C++",
@@ -161,6 +162,7 @@ const lessonContent = {
 function CppCourse({ userId }) {
   const [selectedTopic, setSelectedTopic] = useState("C++ Output");
   const [progress, setProgress] = useState({});
+  const [profilePic, setProfilePic] = useState(jake); // Default to jake
   const db = getDb();
 
   useEffect(() => {
@@ -169,22 +171,33 @@ function CppCourse({ userId }) {
       return;
     }
 
-    const fetchProgress = async () => {
+    const fetchUserData = async () => {
       try {
         const docRef = doc(db, "accountInfo", userId);
         const userDoc = await getDoc(docRef);
+
         if (userDoc.exists()) {
-          const currentProgress = userDoc.data().cppProgress || {};
+          const userData = userDoc.data();
+
+          // Retrieve the profile picture key from Firestore
+          const profilePicKey = userData.profilePic;
+
+          // Use the key to fetch the image from imagesMap
+          const profilePicPath = imagesMap.get(profilePicKey) || jake; // Fallback to jake
+          setProfilePic(profilePicPath);
+
+          // Fetch progress if available
+          const currentProgress = userData.cppProgress || {};
           setProgress(currentProgress);
         } else {
           console.error("No such user document!");
         }
       } catch (error) {
-        console.error("Error fetching progress:", error);
+        console.error("Error fetching user data:", error);
       }
     };
 
-    fetchProgress();
+    fetchUserData();
   }, [userId, db]);
 
   const handleCheckboxChange = async () => {
@@ -219,7 +232,11 @@ function CppCourse({ userId }) {
     <div className="d-flex" style={{ minHeight: "100vh", flexDirection: "column" }}>
       {/* Sage Green Banner */}
       <div className="course-banner">
-        <img src={jake} alt="Decorative Icon" className="decorative-icon" />
+        <img
+          src={profilePic || jake} // Use fetched profilePic or fallback to jake
+          alt="Profile Picture"
+          className="decorative-icon"
+        />
         <img
           src={meteorGif}
           alt="Meteor Progress Indicator"
@@ -244,21 +261,11 @@ function CppCourse({ userId }) {
               <div
                 ref={(el) => {
                   if (el) {
-                    // Ensure CodeMirror is attached only once
                     if (!el.dataset.initialized) {
                       const editor = new EditorView({
                         state: EditorState.create({
                           doc: section.content,
-                          extensions: [
-                            basicSetup,
-                            cpp(),
-                            EditorView.updateListener.of((update) => {
-                              if (update.docChanged) {
-                                const lines = update.state.doc.toString().split("\n").length;
-                                el.style.height = `${Math.max(200, lines * 20)}px`;
-                              }
-                            }),
-                          ],
+                          extensions: [basicSetup, cpp()],
                         }),
                         parent: el,
                       });
