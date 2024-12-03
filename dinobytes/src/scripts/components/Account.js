@@ -5,12 +5,17 @@ import { getAuth, signOut } from "firebase/auth"; // Import Firebase Auth method
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import '../../styles/Main.css';
 import profilePic from '../../img/jake.jpg';
+import ImageCarousel from './ImageCarousel'; // Import the carousel component
+import images from './images'; // Import the array of image paths
+import ChangeProfileModal from './ChangeProfileModal';
 
 function AccountTest({ onDeleteAccount, userId }) {
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [newPassword, setNewPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [username, setUsername] = useState('');
+  const [showChangeProfile, setShowChangeProfile] = useState(false);
+  const [newProfile, setNewProfile] = useState('');
 
   const db = getDb();
   const auth = getAuth(); // Initialize Firebase Auth
@@ -59,6 +64,12 @@ function AccountTest({ onDeleteAccount, userId }) {
     setShowChangePassword(false);
     setNewPassword('');
     setPasswordError('');
+  };
+
+  const handleProfileChange = async () => {
+    alert("Profile updated successfully!");
+    setShowChangeProfile(false);
+    setNewProfile('');
   };
 
   return (
@@ -127,6 +138,16 @@ function AccountTest({ onDeleteAccount, userId }) {
             </button>
           </div>
         </div>
+      )}
+
+      {showChangeProfile && (
+        <ChangeProfileModal
+          handleProfileChange={(image) => {
+            setNewProfile(image); // Save the image URL here
+            setShowChangeProfile(false);
+          }}
+          setShowChangeProfile={setShowChangeProfile}
+        />
       )}
     </Container>
   );
