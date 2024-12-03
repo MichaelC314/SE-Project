@@ -1,14 +1,14 @@
 .flex-column {
-  margin-top: 10px;
-  height: calc(100vh - 56px); /* Adjust for navbar */
-  position: fixed;
-  top: 56px; /* Align below navbar */
-  width: 250px;
-  z-index: 1000;
-  overflow-y: auto;
-  left: 0;
-  max-width: 300px;
-}
+    margin-top: 10px;
+    height: calc(100vh - 56px); /* Adjust based on navbar height */
+    position: fixed;
+    top: 56px; /* Adjust based on navbar height */
+    width: 250px;
+    z-index: 1000;
+    overflow-y: auto;
+    left:0 ;
+    max-width: 300px;
+  }
 /* Sidebar.css */
 .sidebar-link {
   display: block;

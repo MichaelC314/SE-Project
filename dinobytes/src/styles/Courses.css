@@ -32,12 +32,12 @@
   
   /* Main Content */
   .course-page {
-    margin-left: 250px; /* Offset content for sidebar */
+    margin-left: 250px;
     padding: 20px;
-    margin-top: 0px; /* Adjust for banner height */
     flex: 1;
-    padding-bottom: 100px; /* Ensure there's enough space at the bottom */
+    margin-top: 80px;
   }
+  
   /* Footer */
   .course-footer {
     position: fixed;
@@ -50,7 +50,6 @@
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    margin-left: 10%;
   }
   
   .course-footer label {
@@ -75,19 +74,15 @@
     text-align: right;
   }
   
-/*MArgin for Course Title and Content*/
+  /* Course text */
+.course-page p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 16px;
+  color: #333;
+  margin-left: 5%;
+}
 
 .course-page h1 {
-  padding-top: 0;
   margin-left: 5%;
-}
-
-.course-page div {
-  margin-left: 5%;
-  padding-bottom: 5%;
-}
-
-.course-page .code-container {
-  margin-left: 0;
-  padding-left: 0;
 }
