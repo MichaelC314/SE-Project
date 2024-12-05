@@ -1,34 +1,40 @@
 .flex-column {
-    margin-top: 10px;
-    height: calc(100vh - 56px); /* Adjust based on navbar height */
-    position: fixed;
-    top: 56px; /* Adjust based on navbar height */
-    width: 250px;
-    z-index: 1000;
-    overflow-y: auto;
-    left:0 ;
-    max-width: 300px;
-  }
+  margin-top: 10px;
+  height: calc(100vh - 56px); /* Adjust based on navbar height */
+  position: fixed;
+  top: 56px; /* Adjust based on navbar height */
+  width: 250px;
+  z-index: 1000;
+  overflow-y: auto;
+  left:0 ;
+  max-width: 300px;
+}
 /* Sidebar.css */
 .sidebar-link {
-  display: block;
-  padding: 12px !important; /* Enforce padding */
-  background-color: #82e8f0 !important; /* Default background color */
-  border: 1px solid #82B7DC !important; /* Red border to ensure visibility */
-  margin-bottom: 5px !important; /* Space between each box */
-  color: #007bff !important; /* Link color */
-  border-radius: 4px !important;
-  text-decoration: none !important;
-  transition: background-color 0.3s, color 0.3s !important; /* Smooth transition for hover effect */
+display: block;
+padding: 12px !important; /* Enforce padding */
+background-color: #98a886 !important; /* Default background color */
+border: 1px solid #536440 !important; /* Red border to ensure visibility */
+margin-bottom: 5px !important; /* Space between each box */
+color: #ffffff !important; /* Link color */
+border-radius: 4px !important;
+text-decoration: none !important;
+transition: background-color 0.3s, color 0.3s !important; /* Smooth transition for hover effect */
 }
 
 .sidebar-link:hover {
-  background-color: #e2e6ea !important; /* Hover color */
-  color: #0056b3 !important; /* Darker color on hover */
+background-color: #536440 !important; /* Hover color */
+border-color: #e4af69 !important;
+color: #e4af69  !important; /* Darker color on hover */
+cursor: url('../img/dinocursor.png'), pointer; /* Custom cursor when hovering over buttons */
 }
 
 .sidebar-link.active {
-  background-color: #d4edda !important; /* Highlight color for active topic */
-  border-color: #e4af69 !important; /* Border color for active topic */
-  font-weight: bold !important;
+background-color: #536440 !important; /* Highlight color for active topic */
+border-color: #e4af69 !important; /* Border color for active topic */
+font-weight: bold !important;
+}
+
+.btn.btn-success:hover {
+cursor: url('../img/dinocursor.png'), pointer !important; /* Custom cursor on hover with high priority */
 }

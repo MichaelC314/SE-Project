@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getDb } from '../services/db.mjs';
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import { encryptData } from './Encryption'
 import '../../styles/Main.css';
 
 function SignUp({ onClose, onLoginSuccess }) {
@@ -39,23 +40,25 @@ function SignUp({ onClose, onLoginSuccess }) {
 
         if (username && password) {
             try {
+                const { iv, encryptedData } = await encryptData(password);
+                
                 // Query Firestore to check if the username/password combination already exists
                 const userQuery = query(
                     collection(db, "accountInfo"),
-                    where("userId", "==", username),
-                    where("password", "==", password)
+                    where("userId", "==", username)
                 );
 
                 const querySnapshot = await getDocs(userQuery);
 
                 if (!querySnapshot.empty) {
                     // if matching document found, fail
-                    setError('This username and password combination already exists.');
+                    setError('This username has been taken.');
                 } else {
                     // If no matching document, proceed with sign-up
                     const newUser = await addDoc(collection(db, "accountInfo"), {
                         userId: username,
-                        password: password
+                        password: encryptedData,
+                        iv: iv
                     });
                     alert('SignUp successful!');
                     onLoginSuccess(newUser.id)

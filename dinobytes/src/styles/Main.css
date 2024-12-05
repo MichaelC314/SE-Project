@@ -35,7 +35,7 @@ body {
   display: flex;
   justify-content: center; /* Ensures the nav items are centered */
   width: 100%; /* Takes full width to center content */
-  margin-left: -120px;
+  margin-left: -50%;
 }
 
 .navbar-brand {
@@ -82,6 +82,26 @@ body {
   }
 }
 
+@keyframes greenBorderAnimation {
+  0% {
+    border-color: #2ecc71; /* Light green */
+  }
+  25% {
+    border-color: #27ae60; /* Medium green */
+  }
+  50% {
+    border-color: #1e8449; /* Darker green */
+  }
+  75% {
+    border-color: #145a32; /* Even darker green */
+  }
+  100% {
+    border-color: #2ecc71; /* Back to light green */
+  }
+}
+
+
+
 /* Styles for Bootstrap Cards */
 .card-img-top {
   width: 100%;
@@ -100,7 +120,7 @@ body {
 
 .card:hover {
   transform: scale(1.05); /* Scales the card to 105% of its original size */
-  animation: rgbBorderAnimation 5s infinite;
+  animation: greenBorderAnimation 5s infinite;
   transition: transform .5s ease; 
   border: 4px solid; /* Increase border thickness on hover */
 }
@@ -118,6 +138,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   height: 250px;
 }
 
@@ -254,7 +275,7 @@ label {
 /* Custom Team Card */
 .custom-team-card {
   background-color: var(--light-gray);
-  border: 5px solid var(--medium-blue);
+  border: 1px solid var(--medium-blue);
   border-radius: 8px;
   color: var(--dark-gray);
   width: 100%;
@@ -262,8 +283,6 @@ label {
   height: 380px; /* Adjust height accordingly */
   margin: 10px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for depth */
-  animation: rgbBorderAnimation 5s infinite; /* Permanent RGB animation */
 }
 
 /* GIF Styling */
@@ -274,6 +293,85 @@ label {
   max-height: 250px; /* Max height to prevent excessive scaling */
   object-fit: contain; /* Keep the GIF from stretching */
   margin-top: 10px;
+}
+
+
+
+/* Ensure the account page content is positioned properly */
+.account-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content to the top */
+  align-items: center; /* Center the card horizontally */
+  height: 100vh; /* Make the page take up full viewport height */
+  background-color: white; /* Set background to white */
+  padding: 0;
+  margin: 0;
+}
+
+/* Profile card styling */
+.profile-card {
+  border: 1px solid var(--dark-blue)!important;
+  width: 100%;
+  max-width: 600px; /* Limit width to maintain layout */
+  background-color: white; /* Ensure the card has a white background */
+  margin-top: 0; /* No margin at the top */
+}
+
+/* Profile image styling */
+.profile-img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-top: 0; /* Remove any margin on top of the image */
+}
+
+/* Info card without border */
+.info-card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Apply dark gray border specifically to the account card */
+.account-card {
+  border: 2px solid var(--dark-gray) !important; /* Dark gray border */
+  box-shadow: none !important; /* Remove box shadow if it was conflicting */
+  padding: 20px; /* Add padding to make sure there's enough space around the content */
+}
+
+/* Prevent border color change on hover */
+.account-card:hover {
+  border: 2px solid var(--dark-gray) !important; /* Keep the dark gray border on hover */
+  box-shadow: none !important; /* Prevent box shadow from appearing */
+  transition: none !important;
+  transform: none !important;
+}
+
+
+/* Button hover styling */
+.account-card .btn:hover {
+  background-color: var(--light-blue) !important;
+  cursor: url('../img/dinocursor.png'), pointer !important;
+}
+
+
+.static-banner {
+  position: fixed;
+  bottom: 20px; /* Adjust the position slightly above the screen bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%; /* Slightly smaller */
+  max-width: 400px; /* Set a maximum width */
+  border-radius: 15px; /* Curved edges */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+  z-index: 1050; /* Keeps it on top of most elements */
+}
+
+.static-banner img {
+  width: 100%; /* Make the banner responsive */
+  height: auto; /* Preserve aspect ratio */
+  border-radius: 15px; /* Same as parent for a uniform look */
 }
 
 
