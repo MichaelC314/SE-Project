@@ -29,7 +29,7 @@ const AboutUs = () => {
       backgroundRepeat: 'no-repeat'
     }}
   >
-            <h5 className="card-title">Cooper: Frontend</h5>
+            <h5 className="card-title">Cooper: Frontend, Terminal Guru</h5>
             <img 
   src={require('../img/cooper.gif')} 
   alt="Cooper's chosen GIF" 
@@ -42,7 +42,7 @@ const AboutUs = () => {
         {/* Team Card 2 */}
         <div className="col-md-4">
           <div className="custom-team-card">
-            <h5 className="card-title">Michael: Backend</h5>
+            <h5 className="card-title">Michael: Backend, certified Cyber man</h5>
             <img 
               src={require('../img/michael.gif')} 
               alt="Michael's chosen GIF" 
@@ -54,7 +54,7 @@ const AboutUs = () => {
         {/* Team Card 3 */}
         <div className="col-md-4">
           <div className="custom-team-card">
-            <h5 className="card-title">Miguel: Frontend</h5>
+            <h5 className="card-title">Miguel: Frontend, also had his git changes deleted</h5>
             <img 
               src={require('../img/miguel.gif')} 
               alt="Miguel's chosen GIF" 
@@ -66,7 +66,7 @@ const AboutUs = () => {
         {/* Team Card 4 */}
         <div className="col-md-4 d-flex justify-content-center">
           <div className="custom-team-card">
-            <h5 className="card-title">Philippe: Backend</h5>
+            <h5 className="card-title">Philippe: Backend, Database, Profile pictures, Avatar, created the internet, animated arcane, wrote genesis</h5>
             <img 
               src={require('../img/philipe.gif')} 
               alt="Philipe's chosen GIF" 
@@ -78,7 +78,7 @@ const AboutUs = () => {
         {/* Team Card 5 */}
         <div className="col-md-4 d-flex justify-content-center">
           <div className="custom-team-card">
-            <h5 className="card-title">Rachel: Art and Lessons</h5>
+            <h5 className="card-title">Rachel: Art and attempts</h5>
             <img 
               src={require('../img/rachel.gif')} 
               alt="Rachel's chosen GIF" 
