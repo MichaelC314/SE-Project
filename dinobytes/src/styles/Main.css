@@ -356,3 +356,22 @@ label {
 }
 
 
+.static-banner {
+  position: fixed;
+  bottom: 20px; /* Adjust the position slightly above the screen bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%; /* Slightly smaller */
+  max-width: 400px; /* Set a maximum width */
+  border-radius: 15px; /* Curved edges */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+  z-index: 1050; /* Keeps it on top of most elements */
+}
+
+.static-banner img {
+  width: 100%; /* Make the banner responsive */
+  height: auto; /* Preserve aspect ratio */
+  border-radius: 15px; /* Same as parent for a uniform look */
+}
+
+
