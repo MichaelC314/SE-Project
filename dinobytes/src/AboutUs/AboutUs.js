@@ -29,7 +29,7 @@ const AboutUs = () => {
       backgroundRepeat: 'no-repeat'
     }}
   >
-            <h5 className="card-title">Cooper: Frontend, Terminal Guru</h5>
+            <h5 className="card-title">Cooper: Frontend, Terminal Guru (trust) </h5>
             <img 
   src={require('../img/cooper.gif')} 
   alt="Cooper's chosen GIF" 
