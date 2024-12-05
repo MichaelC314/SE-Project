@@ -167,6 +167,19 @@ function PythonCourse({ userId }) {
         ) : (
           <p>No content available for this topic.</p>
         )}
+
+        <div className="jdoodle-container">
+          <iframe
+            src="https://www.jdoodle.com/embed/v1/d5db68fee77c3fc1"
+            title="JDoodle IDE"
+            style={{
+              width: "100%",
+              height: "600px",
+              border: "none",
+            }}
+          ></iframe>
+        </div>
+
       </div>
 
       {/* Footer with Checkboxes */}
