@@ -1,2 +1,2 @@
-# SE-Project
-Lorem Ipsum
+# DinoBytes
+![Project Page](dinobytes/public/mainPage.png)
